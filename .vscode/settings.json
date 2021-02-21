@@ -1,0 +1,35 @@
+{
+  "cSpell.words": [
+    "border",
+    "continuest",
+    "get",
+    "groupmanage",
+    "jjsg",
+    "jobsmanage",
+    "realname",
+    "state"
+  ],
+  // 格式化设置
+  "editor.formatOnSave": true,
+  "editor.minimap.maxColumn": 80,
+  "vetur.format.defaultFormatter.html": "prettier",
+  "vetur.format.defaultFormatter.js": "prettier",
+  "vetur.format.defaultFormatter.less": "prettier",
+  "vetur.format.defaultFormatterOptions": {
+      "prettier": {
+          "printWidth": 140,
+          "singleQuote": true, // 使用单引号
+          "semi": true, // 末尾使用分号
+          "tabWidth": 2,
+          "arrowParens": "avoid",
+          "bracketSpacing": true,
+          "proseWrap": "preserve", // 代码超出是否要换行 preserve保留
+      }
+  },
+  // less设置
+  "less.compile": {
+    "compress": false, 
+    "sourceMap": false, 
+    "out": ".\\",       // 这里是代表编译后生成的css文件所放的位置，当前写法表示 当前目录下生成index.css文件
+  }
+}
