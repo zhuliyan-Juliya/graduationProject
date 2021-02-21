@@ -6,13 +6,20 @@ import VueRouter from 'vue-router';
 Vue.use(VueRouter);
 
 export default new VueRouter({
-    mode: 'hash',
+    mode: 'history',
     routes: [
         {
             path: '/Home',
             name: 'Home',
             // component: Home
-            component: () => import(/* webpackChunkName: "Home" */ '../App.vue')
+            component: () => import(/* webpackChunkName: "Home" */ '../views/Layout.vue'),
+            children: [
+                {
+                    path: 'Main',
+                    name: 'Main',
+                    component: () => import('../views/main/Main.vue'),
+                }
+            ]
         },
         {
             path: '/Login',

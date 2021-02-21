@@ -38,6 +38,7 @@ export default {
               loading.close();
               this.$router.push({path: '/Home'})
               this.$message.success('登录成功！')
+              localStorage.setItem('token', 'zhuliyanToken')
           },500)
       },
       check() {

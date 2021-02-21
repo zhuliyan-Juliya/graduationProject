@@ -1,9 +1,8 @@
 <template>
   <div>
       <el-header>
-          <router-link to="/Main">工作台</router-link>
+          <router-link to="Main">工作台</router-link>
       </el-header>
-      12313
       <el-main>
           <router-view></router-view>
       </el-main>
@@ -20,6 +19,12 @@ export default {
   components: {},
 
   computed: {},
+
+  created() {
+    if (!localStorage.getItem('token')) {
+      this.$router.push({path: '/Login'})
+    }
+  },
 
   mounted () {},
 

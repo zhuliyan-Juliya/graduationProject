@@ -76,7 +76,7 @@ yarn install
 2. 启动
 
 ```bash
-yarn run dev
+yarn run dev || yarn dev
 
 # 关于启动命令来源，可以查看 package.json 文件 这个文件 scripts 属性中就是可执行的命令
 ```

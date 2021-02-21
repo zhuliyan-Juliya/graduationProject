@@ -6,7 +6,7 @@
   "author": "tangmengcheng <1018663766@qq.com>",
   "scripts": {
     "build": "webpack --config ./webpack.prod.js",
-    "dev": "webpack-dev-server --config ./webpack.dev.js"
+    "dev": "webpack-dev-server --config ./webpack.dev.js --history-api-fallback"
   },
   "license": "MIT",
   "devDependencies": {
