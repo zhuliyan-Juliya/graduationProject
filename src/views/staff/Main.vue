@@ -1,5 +1,5 @@
 <template>
-  <div>组织</div>
+  <div>员工</div>
 </template>
 
 <script>

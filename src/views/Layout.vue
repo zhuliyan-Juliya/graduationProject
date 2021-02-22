@@ -64,12 +64,12 @@ $color-text: #F0FFFF;
   background-color: $cloor-bg;
   line-height: 60px;
   .line-box {
-    display: inline-block;
+    float: left;
     width: 500px;
     margin-left: 50px;
     .menu-box {
       display: flex;
-      /* background-color: pink; */
+      overflow: hidden;
       justify-content: space-between;
       
       a {
@@ -100,6 +100,7 @@ $color-text: #F0FFFF;
   }
   img {
     vertical-align: top;
+    float: left;
   }
 }
 </style>

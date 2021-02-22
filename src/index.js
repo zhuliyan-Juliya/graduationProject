@@ -10,6 +10,10 @@ import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 Vue.use(ElementUI);
 
+/* 自定义组件全局注册 - 可以搞成自动化提取 */
+import cardC from './components/cardComponents/index';
+Vue.use(cardC)
+
 
 new Vue({
     router,

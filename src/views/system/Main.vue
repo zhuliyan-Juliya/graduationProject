@@ -1,5 +1,5 @@
 <template>
-  <div>组织</div>
+  <div>系统</div>
 </template>
 
 <script>

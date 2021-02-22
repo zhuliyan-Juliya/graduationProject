@@ -1,5 +1,7 @@
 <template>
-  <div>考勤</div>
+  <div class="card">
+1123
+  </div>
 </template>
 
 <script>
@@ -20,4 +22,9 @@ export default {
 
 </script>
 <style lang='scss' scoped>
+.card {
+    width: 100%;
+    min-width: 150px;
+    background-color: blue;
+}
 </style>
