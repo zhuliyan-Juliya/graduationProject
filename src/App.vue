@@ -1,26 +1,18 @@
 <template>
-    <div>
-        <!-- <Layout></Layout>
-        <Main></Main> -->
-        <router-view></router-view>
-    </div>
+  <div>
+    <!-- <Layout></Layout>-->
+    <router-view></router-view>
+  </div>
 </template>
 <script>
-import Layout from './views/Layout'
-import Main from './views/Main'
+import Layout from './views/Layout';
 export default {
-    mounted() {
-        
-    },
-    methods: {
-
-    },
-    components: {
-        Layout,
-        Main
-    }
-}
+  mounted() {},
+  methods: {},
+  components: {
+    Layout,
+  },
+};
 </script>
 <style lang="scss" scoped>
-
 </style>

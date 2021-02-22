@@ -1,19 +1,18 @@
 <template>
   <div>
-      <el-header>
-          <router-link to="Main">工作台</router-link>
-      </el-header>
-      <el-main>
-          <router-view></router-view>
-      </el-main>
+    <el-header>
+      <router-link to="/Home/Main">工作台</router-link>
+    </el-header>
+    <el-main>
+      <router-view></router-view>
+    </el-main>
   </div>
 </template>
 
 <script>
 export default {
   data() {
-    return {
-    }
+    return {};
   },
 
   components: {},
@@ -22,15 +21,14 @@ export default {
 
   created() {
     if (!localStorage.getItem('token')) {
-      this.$router.push({path: '/Login'})
+      this.$router.push({ path: '/Login' });
     }
   },
 
-  mounted () {},
+  mounted() {},
 
-  methods: {}
-}
-
+  methods: {},
+};
 </script>
 <style lang='scss' scoped>
 </style>

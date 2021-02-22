@@ -1,25 +1,21 @@
 <template>
-  <div>
-      工作台
-  </div>
+  <div>工作台123131</div>
 </template>
 
 <script>
 export default {
   data() {
-    return {
-    }
+    return {};
   },
 
   components: {},
 
   computed: {},
 
-  mounted () {},
+  mounted() {},
 
-  methods: {}
-}
-
+  methods: {},
+};
 </script>
 <style lang='scss' scoped>
 </style>

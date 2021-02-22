@@ -7,8 +7,9 @@ module.exports = {
     mode: 'development', // 配置开发环境模式
     entry: ['@babel/polyfill', './src/index.js'], // 打包的入口文件
     output: { // 打包文件的出口
+        publicPath: '/',
         filename: 'bound.js', // 打包文件名
-        path: path.resolve(__dirname, 'dist') // 打包文件存放的目录
+        path: path.resolve(__dirname, './dist') // 打包文件存放的目录
     },
     devServer: {
         hot: true, // 热更新
@@ -86,7 +87,7 @@ module.exports = {
                             fallback: {
                                 loader: 'file-loader',
                                 options: {
-                                name: 'media/[name].[hash:8].[ext]'
+                                    name: 'media/[name].[hash:8].[ext]'
                                 }
                             }
                         }
