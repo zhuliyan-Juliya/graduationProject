@@ -5,11 +5,36 @@ export default [
     // component: Home
     component: () => import(/* webpackChunkName: "Home" */ '../views/Layout.vue'),
     children: [
+      // 工作台
       {
         path: 'Main',
         name: 'Main',
         component: () => import('../views/main/Main.vue'),
-      }
+      },
+      // 组织管理
+      {
+        path: 'Organization',
+        name: 'Organization',
+        component: () => import('../views/organization/Main.vue'),
+      },
+      // 员工管理
+      {
+        path: 'Staff',
+        name: 'Staff',
+        component: () => import('../views/staff/Main.vue'),
+      },
+      // 考勤管理
+      {
+        path: 'Timecard',
+        name: 'Timecard',
+        component: () => import('../views/timecard/Main.vue'),
+      },
+      // 系统设置
+      {
+        path: 'System',
+        name: 'System',
+        component: () => import('../views/system/Main.vue'),
+      },
     ]
   },
   {

@@ -9,10 +9,11 @@ module.exports = {
     output: { // 打包文件的出口
         publicPath: '/',
         filename: 'bound.js', // 打包文件名
-        path: path.resolve(__dirname, './dist') // 打包文件存放的目录
+        path: path.resolve(__dirname, 'dist') // 打包文件存放的目录
     },
     devServer: {
         hot: true, // 热更新
+        host: 'localhost',
         port: 3000,
         contentBase: './dist'
     },
@@ -70,7 +71,8 @@ module.exports = {
                             fallback: {
                                 loader: 'file-loader',
                                 options: {
-                                    name: '/img/[name].[hash:8].[ext]'
+                                    name: 'img/[name].[hash:8].[ext]',
+                                    publicPath: '/',
                                 }
                             }
                         }
@@ -114,7 +116,7 @@ module.exports = {
             {
                 test: /\.(less|css)$/,
                 use: ['style-loader', 'css-loader', 'less-loader']
-            }
+            },
         ]
     },
     plugins: [

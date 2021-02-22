@@ -89,7 +89,7 @@ sup
  
 img
 {
-	display: block;
+	display: inline-block;
 	border-style: none;
 }
  
