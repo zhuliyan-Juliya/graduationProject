@@ -5,11 +5,15 @@
       <div class="line-box">
         <section class="menu-box">
           <!-- 在router-link上添加click事件会被拦截无效，需要加.native修饰符 -->
-          <router-link :to="item.path" v-for="item in menu" :key="item.name" @click.native="activateMenu" :class="$route.path.indexOf(item.path) > -1 ? 'active' : ''">{{item.name}}</router-link>
+          <router-link
+            :to="item.path"
+            v-for="item in menu"
+            :key="item.name"
+            @click.native="activateMenu"
+            :class="$route.path.indexOf(item.path) > -1 ? 'active' : ''"
+            >{{ item.name }}</router-link
+          >
           <a>更多</a>
-          <!-- <p>
-            {{$route.path}}
-          </p> -->
         </section>
       </div>
     </el-header>
@@ -24,12 +28,12 @@ export default {
   data() {
     return {
       menu: [
-        {path: '/Home/Main', name: '工作台'},
-        {path: '/Home/Organization', name: '组织管理'},
-        {path: '/Home/Staff', name: '员工管理'},
-        {path: '/Home/Timecard', name: '考勤管理'},
-        {path: '/Home/System', name: '系统设置'},
-      ]
+        { path: '/Home/Main', name: '工作台' },
+        { path: '/Home/Organization', name: '组织管理' },
+        { path: '/Home/Staff', name: '员工管理' },
+        { path: '/Home/Timecard', name: '考勤管理' },
+        { path: '/Home/System', name: '系统设置' },
+      ],
     };
   },
 
@@ -47,19 +51,19 @@ export default {
 
   methods: {
     activateMenu(e) {
-      let ele = e.target
-      let eles = ele.parentNode.children
+      let ele = e.target;
+      let eles = ele.parentNode.children;
       Array.from(eles).forEach(item => {
-        item.classList.remove('active')
-      })
-      ele.classList.add('active')
-    }
+        item.classList.remove('active');
+      });
+      ele.classList.add('active');
+    },
   },
 };
 </script>
 <style lang='scss' scoped>
 $cloor-bg: #708090;
-$color-text: #F0FFFF;
+$color-text: #f0ffff;
 .hedaer {
   background-color: $cloor-bg;
   line-height: 60px;
@@ -71,7 +75,7 @@ $color-text: #F0FFFF;
       display: flex;
       overflow: hidden;
       justify-content: space-between;
-      
+
       a {
         color: $color-text;
         position: relative;
@@ -87,12 +91,12 @@ $color-text: #F0FFFF;
           left: 50%;
           margin-left: -10px;
           opacity: 0;
-          transition: all .3s;
+          transition: all 0.3s;
         }
         &.active::after {
           content: '';
           opacity: 1;
-          transition: all .3s;
+          transition: all 0.3s;
           bottom: 0px;
         }
       }
