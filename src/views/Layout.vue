@@ -2,19 +2,14 @@
   <div>
     <el-header class="hedaer">
       <img src="../assets/images/bg.jpg" alt="" width="200" height="60" />
-      <div class="line-box">
-        <section class="menu-box">
-          <!-- 在router-link上添加click事件会被拦截无效，需要加.native修饰符 -->
-          <router-link
-            :to="item.path"
-            v-for="item in menu"
-            :key="item.name"
-            @click.native="activateMenu"
-            :class="$route.path.indexOf(item.path) > -1 ? 'active' : ''"
-            >{{ item.name }}</router-link
-          >
-          <a>更多</a>
-        </section>
+      <div class="z-line-box">
+        <div class="line-box">
+          <section class="menu-box">
+            <!-- 在router-link上添加click事件会被拦截无效，需要加.native修饰符 -->
+            <router-link :to="item.path" v-for="item in menu" :key="item.name" @click.native="activateMenu" :class="$route.path.indexOf(item.path) > -1 ? 'active' : ''">{{ item.name }}</router-link>
+            <a>更多</a>
+          </section>
+        </div>
       </div>
     </el-header>
     <el-main>
@@ -67,37 +62,39 @@ $color-text: #f0ffff;
 .hedaer {
   background-color: $cloor-bg;
   line-height: 60px;
-  .line-box {
-    float: left;
-    width: 500px;
-    margin-left: 50px;
-    .menu-box {
-      display: flex;
-      overflow: hidden;
-      justify-content: space-between;
+  .z-line-box {
+    overflow: hidden;
+    .line-box {
+      float: left;
+      width: 500px;
+      margin-left: 50px;
+      .menu-box {
+        display: flex;
+        justify-content: space-between;
 
-      a {
-        color: $color-text;
-        position: relative;
-        &::after {
-          content: '';
-          width: 0;
-          height: 0;
-          border-width: 0 10px 10px;
-          border-style: solid;
-          border-color: transparent transparent #fff;
-          position: absolute;
-          bottom: -1px;
-          left: 50%;
-          margin-left: -10px;
-          opacity: 0;
-          transition: all 0.3s;
-        }
-        &.active::after {
-          content: '';
-          opacity: 1;
-          transition: all 0.3s;
-          bottom: 0px;
+        a {
+          color: $color-text;
+          position: relative;
+          &::after {
+            content: '';
+            width: 0;
+            height: 0;
+            border-width: 0 10px 10px;
+            border-style: solid;
+            border-color: transparent transparent #fff;
+            position: absolute;
+            bottom: -1px;
+            left: 50%;
+            margin-left: -10px;
+            opacity: 0;
+            transition: all 0.3s;
+          }
+          &.active::after {
+            content: '';
+            opacity: 1;
+            transition: all 0.3s;
+            bottom: 0px;
+          }
         }
       }
     }

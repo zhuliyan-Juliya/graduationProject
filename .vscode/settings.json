@@ -17,7 +17,7 @@
   "vetur.format.defaultFormatter.less": "prettier",
   "vetur.format.defaultFormatterOptions": {
       "prettier": {
-          "printWidth": 140,
+          "printWidth": 220,
           "singleQuote": true, // 使用单引号
           "semi": true, // 末尾使用分号
           "tabWidth": 2,
