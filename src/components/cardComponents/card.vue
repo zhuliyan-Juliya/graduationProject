@@ -1,6 +1,11 @@
 <template>
   <div class="card">
-1123
+    <i :class="data.icoClass"></i>
+    <a :href="data.linkUrl">
+      <span>
+        {{data.title}}&nbsp;<strong>{{data.msgNum}}</strong>
+      </span>
+    </a>
   </div>
 </template>
 
@@ -10,7 +15,11 @@ export default {
     return {
     }
   },
-
+  props: {
+    data: {
+      type: Object
+    }
+  },
   components: {},
 
   computed: {},
@@ -23,8 +32,30 @@ export default {
 </script>
 <style lang='scss' scoped>
 .card {
-    width: 100%;
     min-width: 150px;
-    background-color: blue;
+    background-color: rgb(35, 102, 167);
+    display: flex;
+    justify-content: space-between;
+    height: 56px;
+    i,a {
+      line-height: 56px;
+      font-size: 12px;
+      color: #fff;
+      span {
+        
+        strong {
+          font-size: 16px;
+        }
+      }
+    }
+    a {
+      margin-right: 16px;
+    }
+    i {
+      font-size: 40px;
+      opacity: .5;
+      flex: 1;
+      margin-left: 16px;
+    }
 }
 </style>
