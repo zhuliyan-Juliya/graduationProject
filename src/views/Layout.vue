@@ -1,20 +1,23 @@
 <template>
   <div>
-    <el-header class="hedaer">
-      <img src="../assets/images/bg.jpg" alt="" width="200" height="60" />
-      <div class="z-line-box">
-        <div class="line-box">
-          <section class="menu-box">
-            <!-- 在router-link上添加click事件会被拦截无效，需要加.native修饰符 -->
-            <router-link :to="item.path" v-for="item in menu" :key="item.name" @click.native="activateMenu" :class="$route.path.indexOf(item.path) > -1 ? 'active' : ''">{{ item.name }}</router-link>
-            <a>更多</a>
-          </section>
+    <el-container>
+      <el-header class="hedaer">
+        <img src="../assets/images/bg.jpg" alt="" width="200" height="60" />
+        <div class="z-line-box">
+          <div class="line-box">
+            <section class="menu-box">
+              <!-- 在router-link上添加click事件会被拦截无效，需要加.native修饰符 -->
+              <router-link :to="item.path" v-for="item in menu" :key="item.name" @click.native="activateMenu" :class="$route.path.indexOf(item.path) > -1 ? 'active' : ''">{{ item.name }}</router-link>
+              <a>更多</a>
+            </section>
+          </div>
         </div>
-      </div>
-    </el-header>
-    <el-main>
-      <router-view></router-view>
-    </el-main>
+      </el-header>
+
+      <el-main>
+        <router-view></router-view>
+      </el-main>
+    </el-container>
   </div>
 </template>
 
