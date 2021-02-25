@@ -36,7 +36,9 @@
         </div>
         <div class="right-box">
           <div class="right">
-            <el-card shadow="hover" class="right-card"> 鼠标悬浮时显示 </el-card>
+            <el-card shadow="hover" class="right-card">
+              <Card-title :cardData="cardTData" @disClickEvent="disClickEvent"></Card-title>
+            </el-card>
           </div>
         </div>
       </div>
@@ -67,6 +69,11 @@ export default {
         { linkUrl: '', msgNum: 1, value: 6, label: '社保补款项' },
         { linkUrl: '', msgNum: 1, value: 7, label: '社保退款项' },
       ],
+      cardTData: {
+        title: '招聘进度',
+        leftIcoClass: 'el-icon-s-custom',
+        rightIcoClass: 'el-icon-setting',
+      },
     };
   },
 
@@ -79,6 +86,9 @@ export default {
   methods: {
     goMatterDetail(derection) {
       console.log('derection', derection);
+    },
+    disClickEvent() {
+      console.log('子组件');
     },
   },
 };
@@ -102,6 +112,7 @@ main {
   .p-box {
     display: flex;
     justify-content: space-between;
+    height: 152px;
     .left-box {
       width: 67%;
       flex: 1;
@@ -141,8 +152,11 @@ main {
     .right-box {
       float: left;
       width: 33%;
+      height: 152px;
       .right {
+        height: inherit;
         .right-card {
+          height: inherit;
           min-width: 300px;
         }
       }

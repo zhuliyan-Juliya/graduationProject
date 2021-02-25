@@ -12,7 +12,9 @@ Vue.use(ElementUI);
 
 /* 自定义组件全局注册 - 可以搞成自动化提取 */
 import cardC from './components/cardComponents/index';
+import cardT from './components/cardTitleComponents/index';
 Vue.use(cardC)
+Vue.use(cardT)
 
 
 new Vue({
@@ -21,4 +23,4 @@ new Vue({
     render: h => h(App)
 }).$mount('#app')
 
-console.log('系统环境变量',process.env)
+console.log('系统环境变量', process.env)
