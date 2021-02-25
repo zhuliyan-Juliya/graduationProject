@@ -9,14 +9,37 @@
         </ul>
       </el-row>
 
-      <el-row style="margin-top: 10px">
-        <el-col :span="16">
-          <el-card shadow="hover"> 鼠标悬浮时显示 </el-card>
-        </el-col>
-        <el-col :span="8">
-          <el-card shadow="hover"> 鼠标悬浮时显示 </el-card>
-        </el-col>
-      </el-row>
+      <div style="margin-top: 10px" class="p-box">
+        <div class="left-box">
+          <div class="left">
+            <el-card shadow="hover" class="left-card">
+              <div class="tit">
+                <span><i class="el-icon-time"></i>待办事项</span>
+                <el-select :value="matter" clearable :placeholder="`全部（${matterTotal}）`">
+                  <el-option v-for="item in matterOptions" :key="item.value" :label="item.label" :value="item.value">
+                    <template>
+                      <div @click="goMatterDetail(item.value)">
+                        {{ `${item.label} (${item.msgNum})` }}
+                      </div>
+                    </template>
+                  </el-option>
+                </el-select>
+              </div>
+              <ul class="matter-detail">
+                <li v-for="item in matterOptions" :key="item.value">
+                  <strong class="num">{{ item.msgNum }}</strong
+                  ><a :href="item.linkUrl">{{ item.label }}</a>
+                </li>
+              </ul>
+            </el-card>
+          </div>
+        </div>
+        <div class="right-box">
+          <div class="right">
+            <el-card shadow="hover" class="right-card"> 鼠标悬浮时显示 </el-card>
+          </div>
+        </div>
+      </div>
     </main>
   </div>
 </template>
@@ -26,12 +49,23 @@ export default {
   data() {
     return {
       cardData: [
-        { title: '总员工', icoClass: 'el-icon-user-solid', msgNum: 2, linkUrl: '/Hm' },
-        { title: '正式', icoClass: 'el-icon-user', msgNum: 3, linkUrl: '/Hm' },
-        { title: '试用期', icoClass: 'el-icon-help', msgNum: 4, linkUrl: '/Hm' },
-        { title: '本月新入职', icoClass: 'el-icon-s-check', msgNum: 5, linkUrl: '/Hm' },
-        { title: '本月离职', icoClass: 'el-icon-warning', msgNum: 6, linkUrl: '/Hm' },
-        { title: '待入职员工', icoClass: 'el-icon-circle-plus', msgNum: 6, linkUrl: '/Hm' },
+        { bgColor: 'rgb(35, 102, 167)', title: '总员工', icoClass: 'el-icon-user-solid', msgNum: 2, linkUrl: '/Hm' },
+        { bgColor: 'rgb(73, 167, 130)', title: '正式', icoClass: 'el-icon-user', msgNum: 3, linkUrl: '/Hm' },
+        { bgColor: 'rgb(57, 146, 193)', title: '试用期', icoClass: 'el-icon-help', msgNum: 4, linkUrl: '/Hm' },
+        { bgColor: 'rgb(233, 143, 39)', title: '本月新入职', icoClass: 'el-icon-s-check', msgNum: 5, linkUrl: '/Hm' },
+        { bgColor: 'rgb(35, 102, 167)', title: '本月离职', icoClass: 'el-icon-warning', msgNum: 6, linkUrl: '/Hm' },
+        { bgColor: 'rgb(73, 167, 130)', title: '待入职员工', icoClass: 'el-icon-circle-plus', msgNum: 6, linkUrl: '/Hm' },
+      ],
+      matter: null,
+      matterTotal: 7,
+      matterOptions: [
+        { linkUrl: '', msgNum: 1, value: 1, label: '入职办理' },
+        { linkUrl: '', msgNum: 1, value: 2, label: '离职办理' },
+        { linkUrl: '', msgNum: 1, value: 3, label: '员工加入审核' },
+        { linkUrl: '', msgNum: 1, value: 4, label: '入职未增员' },
+        { linkUrl: '', msgNum: 1, value: 5, label: '离职未减员' },
+        { linkUrl: '', msgNum: 1, value: 6, label: '社保补款项' },
+        { linkUrl: '', msgNum: 1, value: 7, label: '社保退款项' },
       ],
     };
   },
@@ -42,23 +76,75 @@ export default {
 
   mounted() {},
 
-  methods: {},
+  methods: {
+    goMatterDetail(derection) {
+      console.log('derection', derection);
+    },
+  },
 };
 </script>
-<style lang='scss' scoped>
-.main {
-  background-color: pink;
-  height: 200px;
+<style lang='less' scoped>
+main {
+  // height: 200px;
   width: 100%;
   .card-box {
     display: flex;
     justify-content: space-between;
+    flex-direction: row;
     li {
       margin-right: 8px;
-      display: flex;
       flex: 1;
       &:last-child {
         margin-right: 0;
+      }
+    }
+  }
+  .p-box {
+    display: flex;
+    justify-content: space-between;
+    .left-box {
+      width: 67%;
+      flex: 1;
+      float: left;
+      .left {
+        margin-right: 26px;
+        .left-card {
+          min-width: 615px;
+          .tit {
+            display: flex;
+            justify-content: space-between;
+            line-height: 40px;
+            i {
+              font-size: 20px;
+              vertical-align: middle;
+              margin-right: 3px;
+            }
+          }
+          .matter-detail {
+            margin-top: 20px;
+            height: 50px;
+            li {
+              display: flex;
+              flex-direction: column;
+              float: left;
+              width: 14%;
+              text-align: center;
+              strong {
+                font-size: 20px;
+                font-weight: 700;
+              }
+            }
+          }
+        }
+      }
+    }
+    .right-box {
+      float: left;
+      width: 33%;
+      .right {
+        .right-card {
+          min-width: 300px;
+        }
       }
     }
   }
