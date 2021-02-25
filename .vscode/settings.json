@@ -27,9 +27,4 @@
       }
   },
   // less设置
-  "less.compile": {
-    "compress": false, 
-    "sourceMap": false, 
-    "out": ".\\",       // 这里是代表编译后生成的css文件所放的位置，当前写法表示 当前目录下生成index.css文件
-  }
 }

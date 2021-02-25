@@ -4,6 +4,7 @@ export default [
     name: 'Home',
     // component: Home
     component: () => import(/* webpackChunkName: "Home" */ '../views/Layout.vue'),
+    redirect:  '/Home/Main',
     children: [
       // 工作台
       {
@@ -46,4 +47,5 @@ export default [
     path: '*',
     redirect: '/Home/Main'
   }
+  
 ]

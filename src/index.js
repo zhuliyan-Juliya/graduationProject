@@ -3,8 +3,9 @@ import App from './App.vue';
 import router from './router';
 import store from './store';
 
-// 浏览器样式初始化
+// 浏览器样式初始化、基础样式
 import './assets/css/initialize.css'
+import './assets/css/function.less'
 // ElementUI
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';

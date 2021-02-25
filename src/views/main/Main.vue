@@ -9,7 +9,7 @@
         </ul>
       </el-row>
 
-      <div style="margin-top: 10px" class="p-box">
+      <div style="margin-top: 20px" class="p-box">
         <div class="left-box">
           <div class="left">
             <el-card shadow="hover" class="left-card">
@@ -32,12 +32,24 @@
                 </li>
               </ul>
             </el-card>
+
+            <el-card shadow="hover" class="left-card" style="margin-top: 10px">
+              <section class="left-box">
+                131232
+              </section>
+              <section class="right-box">
+                131232
+              </section>
+            </el-card>
           </div>
         </div>
         <div class="right-box">
           <div class="right">
             <el-card shadow="hover" class="right-card">
               <Card-title :cardData="cardTData" @disClickEvent="disClickEvent"></Card-title>
+              <main>
+                <p v-if="recruitTask.length === 0">暂无招聘任务，<a href="#" class="color-ac">新增招聘计划</a></p>
+              </main>
             </el-card>
           </div>
         </div>
@@ -74,6 +86,7 @@ export default {
         leftIcoClass: 'el-icon-s-custom',
         rightIcoClass: 'el-icon-setting',
       },
+      recruitTask: []
     };
   },
 
@@ -112,7 +125,6 @@ main {
   .p-box {
     display: flex;
     justify-content: space-between;
-    height: 152px;
     .left-box {
       width: 67%;
       flex: 1;
@@ -158,6 +170,11 @@ main {
         .right-card {
           height: inherit;
           min-width: 300px;
+          main {
+            height: 80px;
+            line-height: 80px;
+            text-align: center;
+          }
         }
       }
     }
