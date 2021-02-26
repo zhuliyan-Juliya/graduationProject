@@ -14,8 +14,10 @@ Vue.use(ElementUI);
 /* 自定义组件全局注册 - 可以搞成自动化提取 */
 import cardC from './components/cardComponents/index';
 import cardT from './components/cardTitleComponents/index';
+import shortcut from './components/shortcutComponents/index';
 Vue.use(cardC)
 Vue.use(cardT)
+Vue.use(shortcut)
 
 
 new Vue({

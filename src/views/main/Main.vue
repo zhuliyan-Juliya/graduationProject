@@ -32,7 +32,7 @@
                 </li>
               </ul>
             </el-card>
-
+            <!-- 工作日历模块 -->
             <el-card shadow="hover" class="left-card" style="margin-top: 10px">
               <section class="left-box">
                 <Card-title :cardData="calenderCardTData" @disClickEvent="disClickEvent"></Card-title>
@@ -44,16 +44,35 @@
 
               <section class="right-box">
                 <Card-title :cardData="tipsCardTData" @disClickEvent="disClickEvent"></Card-title>
+
+                <main>
+                  <div v-if="tipsCardTDataLength.length === 0" class="message-box">
+                    <img src="../../assets/images/message.svg" />
+                    <p>暂无提醒</p>
+                  </div>
+                </main>
               </section>
             </el-card>
           </div>
         </div>
         <div class="right-box">
           <div class="right">
-            <el-card shadow="hover" class="right-card">
+            <!-- 招聘进度模块 -->
+            <el-card shadow="hover" class="right-card recruit">
               <Card-title :cardData="recruitCardTData" @disClickEvent="disClickEvent"></Card-title>
               <main>
                 <p v-if="recruitTask.length === 0">暂无招聘任务，<a href="#" class="color-ac">新增招聘计划</a></p>
+              </main>
+            </el-card>
+            <!-- 快捷功能入口 -->
+            <el-card shadow="hover" class="right-card shortcut" style="margin-top: 10px">
+              <Card-title :cardData="shortcutCardTitleData" @disClickEvent="disClickEvent"></Card-title>
+              <main>
+                <ul>
+                  <li v-for="(item, index) in shortcutFuncData" :key="index">
+                    <Shortcut :cardData="item"></Shortcut>
+                  </li>
+                </ul>
               </main>
             </el-card>
           </div>
@@ -101,8 +120,25 @@ export default {
       tipsCardTData: {
         title: '今日提醒',
         leftIcoClass: 'el-icon-chat-line-round',
+        // rightIcoClass: 'el-icon-setting',
+      },
+      tipsCardTDataLength: [],
+      shortcutCardTitleData: {
+        title: '快捷功能入口',
+        leftIcoClass: 'el-icon-position',
         rightIcoClass: 'el-icon-setting',
       },
+      shortcutFuncData: [
+        { disable: false, imgUrl: require('images/social.svg'), desc: '社保计算器', linkUrl: 'https://salary.dhumedia.cn/' },
+        { disable: false, imgUrl: require('images/personalIncome.svg'), desc: '个税计算器', linkUrl: 'https://www.gerensuodeshui.cn/' },
+        { disable: true, imgUrl: require('images/talentPool.svg'), desc: '人才库', linkUrl: 'https://www.gerensuodeshui.cn/' },
+        { disable: false, imgUrl: require('images/social.svg'), desc: '社保计算器', linkUrl: 'https://salary.dhumedia.cn/' },
+        { disable: false, imgUrl: require('images/personalIncome.svg'), desc: '个税计算器', linkUrl: 'https://www.gerensuodeshui.cn/' },
+        { disable: true, imgUrl: require('images/talentPool.svg'), desc: '人才库', linkUrl: 'https://www.gerensuodeshui.cn/' },
+        { disable: false, imgUrl: require('images/social.svg'), desc: '社保计算器', linkUrl: 'https://salary.dhumedia.cn/' },
+        { disable: false, imgUrl: require('images/personalIncome.svg'), desc: '个税计算器', linkUrl: 'https://www.gerensuodeshui.cn/' },
+        { disable: true, imgUrl: require('images/talentPool.svg'), desc: '人才库', linkUrl: 'https://www.gerensuodeshui.cn/' },
+      ],
     };
   },
 
@@ -178,6 +214,16 @@ main {
           }
           .right-box {
             width: 30%;
+            main {
+              height: 325px;
+              .message-box {
+                height: inherit;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+              }
+            }
           }
         }
       }
@@ -185,16 +231,32 @@ main {
     .right-box {
       float: left;
       width: 33%;
-      height: 152px;
       .right {
-        height: inherit;
         .right-card {
-          height: inherit;
           min-width: 300px;
+        }
+        .recruit {
           main {
-            height: 80px;
-            line-height: 80px;
+            height: 70px;
+            line-height: 70px;
             text-align: center;
+          }
+        }
+        .shortcut {
+          height: 421px;
+          main {
+            height: 300px;
+            ul {
+              display: flex;
+              justify-content: flex-start;
+              align-items: flex-start;
+              flex-wrap: wrap;
+              margin-top: 36px;
+              li {
+                width: 33%;
+                height: 104px;
+              }
+            }
           }
         }
       }

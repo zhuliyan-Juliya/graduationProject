@@ -28,7 +28,7 @@ export default {
   line-height: 40px;
   i {
     font-size: 20px;
-    vertical-align: middle;
+    vertical-align: -9%;
     margin-right: 3px;
     &::before {
       line-height: 40px;
