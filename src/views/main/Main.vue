@@ -35,10 +35,15 @@
 
             <el-card shadow="hover" class="left-card" style="margin-top: 10px">
               <section class="left-box">
-                131232
+                <Card-title :cardData="calenderCardTData" @disClickEvent="disClickEvent"></Card-title>
+
+                <el-calendar v-model="timeValue"> </el-calendar>
               </section>
+
+              <el-divider direction="vertical" class="fl" style="height: 100%"></el-divider>
+
               <section class="right-box">
-                131232
+                <Card-title :cardData="tipsCardTData" @disClickEvent="disClickEvent"></Card-title>
               </section>
             </el-card>
           </div>
@@ -46,7 +51,7 @@
         <div class="right-box">
           <div class="right">
             <el-card shadow="hover" class="right-card">
-              <Card-title :cardData="cardTData" @disClickEvent="disClickEvent"></Card-title>
+              <Card-title :cardData="recruitCardTData" @disClickEvent="disClickEvent"></Card-title>
               <main>
                 <p v-if="recruitTask.length === 0">暂无招聘任务，<a href="#" class="color-ac">新增招聘计划</a></p>
               </main>
@@ -81,12 +86,23 @@ export default {
         { linkUrl: '', msgNum: 1, value: 6, label: '社保补款项' },
         { linkUrl: '', msgNum: 1, value: 7, label: '社保退款项' },
       ],
-      cardTData: {
+      recruitCardTData: {
         title: '招聘进度',
         leftIcoClass: 'el-icon-s-custom',
         rightIcoClass: 'el-icon-setting',
       },
-      recruitTask: []
+      recruitTask: [],
+      calenderCardTData: {
+        title: '工作日历',
+        leftIcoClass: 'el-icon-date',
+        rightIcoClass: 'el-icon-setting',
+      },
+      timeValue: new Date(),
+      tipsCardTData: {
+        title: '今日提醒',
+        leftIcoClass: 'el-icon-chat-line-round',
+        rightIcoClass: 'el-icon-setting',
+      },
     };
   },
 
@@ -110,6 +126,7 @@ export default {
 main {
   // height: 200px;
   width: 100%;
+  overflow: hidden;
   .card-box {
     display: flex;
     justify-content: space-between;
@@ -125,6 +142,7 @@ main {
   .p-box {
     display: flex;
     justify-content: space-between;
+    overflow: hidden;
     .left-box {
       width: 67%;
       flex: 1;
@@ -158,6 +176,9 @@ main {
               }
             }
           }
+          .right-box {
+            width: 30%;
+          }
         }
       }
     }
@@ -179,5 +200,12 @@ main {
       }
     }
   }
+}
+/* /deep/ 深度选择器可以影响子组件内部的样式 */
+/deep/ .el-calendar-day {
+  height: 35px;
+}
+/deep/ .el-divider--vertical {
+  height: 320px;
 }
 </style>
