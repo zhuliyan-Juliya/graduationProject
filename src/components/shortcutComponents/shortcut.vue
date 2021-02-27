@@ -1,6 +1,6 @@
 <template>
   <div class="shortcut">
-    <a :href="cardData.disable ? 'javascript:void(0);' : cardData.linkUrl" target="_blank" :class="{ disable: cardData.disable }">
+    <a :href="cardData.disable ? 'javascript:void(0);' : cardData.linkUrl" :target="cardData.disable ? '' : '_blank'" :class="{ disable: cardData.disable }">
       <img width="30" height="40" :src="cardData.imgUrl" />
       <span :class="{ disable: cardData.disable }">{{ cardData.desc }}</span>
     </a>

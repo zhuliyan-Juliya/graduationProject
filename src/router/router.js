@@ -4,7 +4,7 @@ export default [
     name: 'Home',
     // component: Home
     component: () => import(/* webpackChunkName: "Home" */ '../views/Layout.vue'),
-    redirect:  '/Home/Main',
+    redirect: '/Home/Main',
     children: [
       // 工作台
       {
@@ -17,6 +17,13 @@ export default [
         path: 'Organization',
         name: 'Organization',
         component: () => import('../views/organization/Main.vue'),
+        children: [
+          {
+            path: 'CompanyList',
+            name: 'CompanyList',
+            component: () => import('../views/organization/CompanyList.vue'),
+          },
+        ]
       },
       // 员工管理
       {
@@ -43,9 +50,9 @@ export default [
     name: 'Login',
     component: () => import('../views/Login.vue')
   },
-  {
-    path: '*',
-    redirect: '/Home/Main'
-  }
-  
+  // {
+  //   path: '*',
+  //   redirect: '/Home/Main'
+  // }
+
 ]

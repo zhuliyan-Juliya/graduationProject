@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <main>
+  <div style="padding-top: 60px">
+    <el-main>
       <el-row>
         <ul class="card-box">
           <li v-for="item in cardData" :key="item.title">
@@ -53,6 +53,16 @@
                 </main>
               </section>
             </el-card>
+
+            <div style="margin-top: 10px" class="visual">
+              <el-card shadow="hover" style="width 48%" class="left">
+                <Card-title :cardData="calenderCardTData" @disClickEvent="disClickEvent"></Card-title>
+              </el-card>
+              <el-card shadow="hover" style="width 48%" class="right">
+                <Card-title :cardData="calenderCardTData" @disClickEvent="disClickEvent"></Card-title>
+              </el-card>
+            </div>
+            <!-- 可视化数据展示 -->
           </div>
         </div>
         <div class="right-box">
@@ -75,10 +85,14 @@
                 </ul>
               </main>
             </el-card>
+            <!-- 公司公告 -->
+            <el-card shadow="hover" class="right-card shortcut" style="margin-top: 10px">
+              <Card-title :cardData="shortcutCardTitleData" @disClickEvent="disClickEvent"></Card-title>
+            </el-card>
           </div>
         </div>
       </div>
-    </main>
+    </el-main>
   </div>
 </template>
 
@@ -224,6 +238,19 @@ main {
                 flex-direction: column;
               }
             }
+          }
+        }
+        .visual {
+          .right,
+          .left {
+            width: 49%;
+            float: left;
+            height: 420px;
+          }
+          .left {
+            margin-right: 2%;
+          }
+          .right {
           }
         }
       }

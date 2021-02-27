@@ -2,7 +2,7 @@
   <div>
     <el-container>
       <el-header class="hedaer">
-        <img src="../assets/images/bg.jpg" alt="" width="200" height="60" />
+        <img src="../assets/images/bg.jpg" @click="preV" alt="" width="200" height="60" />
         <div class="z-line-box">
           <div class="line-box">
             <section class="menu-box">
@@ -14,10 +14,12 @@
         </div>
       </el-header>
 
-      <el-main>
-        <router-view></router-view>
-      </el-main>
+      <router-view></router-view>
     </el-container>
+
+    <el-dialog :visible.sync="preView" width="60vw" top="5vh" :modal-append-to-body="true" append-to-body @close="closeFnc">
+      <img width="100%" src="../assets/images/bg.jpg" alt="" style="object-fit: cover" />
+    </el-dialog>
   </div>
 </template>
 
@@ -32,6 +34,7 @@ export default {
         { path: '/Home/Timecard', name: '考勤管理' },
         { path: '/Home/System', name: '系统设置' },
       ],
+      preView: false,
     };
   },
 
@@ -56,15 +59,24 @@ export default {
       });
       ele.classList.add('active');
     },
+    closeFnc() {
+      this.preView = false;
+    },
+    preV() {
+      this.preView = true;
+    },
   },
 };
 </script>
 <style lang='scss' scoped>
-$cloor-bg: #708090;
+$cloor-bg: #366cb3;
 $color-text: #f0ffff;
 .hedaer {
   background-color: $cloor-bg;
   line-height: 60px;
+  position: fixed;
+  width: 100vw;
+  z-index: 999;
   .z-line-box {
     overflow: hidden;
     .line-box {
@@ -105,6 +117,8 @@ $color-text: #f0ffff;
   img {
     vertical-align: top;
     float: left;
+    object-fit: cover;
+    cursor: pointer;
   }
 }
 </style>
