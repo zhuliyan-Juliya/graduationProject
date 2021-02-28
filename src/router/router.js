@@ -23,6 +23,11 @@ export default [
             name: 'CompanyList',
             component: () => import('../views/organization/CompanyList.vue'),
           },
+          {
+            path: 'Department',
+            name: 'Department',
+            component: () => import('../views/organization/Department.vue'),
+          },
         ]
       },
       // 员工管理
@@ -50,9 +55,9 @@ export default [
     name: 'Login',
     component: () => import('../views/Login.vue')
   },
-  // {
-  //   path: '*',
-  //   redirect: '/Home/Main'
-  // }
+  {
+    path: '*',
+    redirect: '/Home/Main'
+  }
 
 ]

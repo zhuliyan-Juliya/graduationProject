@@ -3,24 +3,47 @@
     <el-card shadow="hover">
       <el-row style="padding-bottom: 15px">
         <el-button type="primary" icon="el-icon-plus" @click="newCompany">新增</el-button>
-        <el-button>子公司排序</el-button>
-        <el-button>部门排序</el-button>
+        <el-button icon="el-icon-upload">导入</el-button>
+        <el-button>子部门排序</el-button>
       </el-row>
 
       <el-table :data="tableData" ref="multipleTable" style="width: 100%">
         <el-table-column type="selection" width="55"> </el-table-column>
-        <el-table-column prop="name" label="名称" width="150"> </el-table-column>
-        <el-table-column prop="short_name" label="单位简称"> </el-table-column>
-        <el-table-column prop="typeText" label="类型"> </el-table-column>
-        <el-table-column prop="parent_name" label="上级"> </el-table-column>
-        <el-table-column prop="people_num" label="人数"> </el-table-column>
-        <el-table-column prop="status" label="状态">
+        <el-table-column prop="id" label="ID" width="150"> </el-table-column>
+        <el-table-column prop="deptName" label="部门"> </el-table-column>
+        <el-table-column prop="short_name" label="部门简称"> </el-table-column>
+        <el-table-column prop="parent_name" label="所属公司/中心">
           <template slot-scope="scope">
-            <p v-if="scope.row.status === 0">禁用</p>
-            <p v-else-if="scope.row.status === 1">启用</p>
+            <div>
+              {{ scope.row.sub_company.name }}
+            </div>
           </template>
         </el-table-column>
-        <el-table-column prop="scheme" label="职位体系"> </el-table-column>
+        <el-table-column prop="people_num" label="上级部门"> </el-table-column>
+        <el-table-column prop="people_num" label="部门负责人">
+          <template slot-scope="scope">
+            <div>
+              {{ scope.row.dep_head.fullName }}
+            </div>
+          </template>
+        </el-table-column>
+        <el-table-column prop="people_num" label="兼任负责人"> </el-table-column>
+        <el-table-column prop="people_num" label="工作城市">
+          <template slot-scope="scope">
+            <div>
+              {{ scope.row.work_city ? scope.row.work_city : '不指定城市' }}
+            </div>
+          </template>
+        </el-table-column>
+        <el-table-column prop="nums" label="部门人数"> </el-table-column>
+        <el-table-column prop="people_num" label="编制人数"> </el-table-column>
+        <el-table-column prop="people_num" label="超缺编"> </el-table-column>
+        <el-table-column prop="status" label="状态">
+          <template slot-scope="scope">
+            <p v-if="scope.row.status == 0">禁用</p>
+            <p v-else-if="scope.row.status == 1">启用</p>
+          </template>
+        </el-table-column>
         <el-table-column fixed="right" label="操作" min-width="120">
           <template slot-scope="scope">
             <el-button @click="newCompany(scope.row)" type="text" size="small">编辑</el-button>
@@ -87,25 +110,35 @@ export default {
       DialogFlag: false,
       tableData: [
         {
-          company_id: 4716,
-          company_uuid: '3C84A22C-9AF5-A4B6-48A1-25B135E28D2C',
-          created_at: '2021-02-20 20:03:53',
+          company_id: '4716',
+          created_at: '2021-02-28 17:38:22',
+          dep_head: { id: '1067233', fullName: '盛静银', profileImage: null, designation: '', mobileNumber: '18368490622' },
+          deptName: '技术部',
+          des_id: null,
+          designation: '',
           ding_id: '0',
+          ding_parentid: '0',
+          employee_count: 0,
           feishu_id: '0',
-          id: 6949,
-          name: 'testCompany',
-          num: 2,
+          feishu_parent_id: '0',
+          id: '18433',
+          is_default: '0',
+          nums: '0',
           order: '99999999',
-          parent_name: '无',
-          pid: 0,
-          position_scheme_id: '0',
-          scheme: null,
-          short_name: '',
-          status: 1,
-          type: 0,
-          typeText: '总部',
-          updated_at: '2021-02-20 20:03:53',
+          parent: [],
+          parent_department: null,
+          parent_id: '0',
+          part_time_department_leaders: [],
+          part_time_department_name: '',
+          short_name: 'jsb',
+          status: '1',
+          sub_company: { id: 6949, company_id: 4716, pid: 0, type: 0, name: 'testCompany', status: 1 },
+          sub_id: '6949',
+          updated_at: '2021-02-28 17:38:22',
           wework_id: '0',
+          wework_parentid: '0',
+          work_city: null,
+          work_city_id: '0',
         },
       ],
       editFlag: false,

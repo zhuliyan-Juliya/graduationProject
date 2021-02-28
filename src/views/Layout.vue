@@ -2,7 +2,7 @@
   <div>
     <el-container>
       <el-header class="hedaer">
-        <img src="../assets/images/bg.jpg" @click="preV" alt="" width="200" height="60" />
+        <img src="../assets/images/bg.jpg" @click="preV" alt="" height="60" />
         <div class="z-line-box">
           <div class="line-box">
             <section class="menu-box">
@@ -68,15 +68,24 @@ export default {
   },
 };
 </script>
-<style lang='scss' scoped>
-$cloor-bg: #366cb3;
-$color-text: #f0ffff;
+<style lang='less' scoped>
+@cloor-bg: #366cb3;
+@color-text: #f0ffff;
 .hedaer {
-  background-color: $cloor-bg;
+  background-color: @cloor-bg;
   line-height: 60px;
   position: fixed;
   width: 100vw;
   z-index: 999;
+  padding: 0 !important;
+  img {
+    width: 10%;
+    min-width: 150px;
+    transition: all 0.3s;
+    &:hover {
+      // transform: scale(1.3);
+    }
+  }
   .z-line-box {
     overflow: hidden;
     .line-box {
@@ -88,7 +97,7 @@ $color-text: #f0ffff;
         justify-content: space-between;
 
         a {
-          color: $color-text;
+          color: @color-text;
           position: relative;
           &::after {
             content: '';

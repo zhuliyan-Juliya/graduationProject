@@ -1,8 +1,8 @@
 <template>
-  <div style="padding-top: 60px">
+  <div>
     <section>
       <nav>
-        <el-menu default-active="1" class="el-menu-vertical-demo" router @open="handleOpen" @close="handleClose" background-color="#F2F6F8" text-color="#2F3647 " active-text-color="#06397c">
+        <el-menu default-active="1" class="el-menu-vertical-demo" router @open="handleOpen" @close="handleClose" background-color="#F2F6F8" text-color="#2F3647 " active-text-color="#1270EC">
           <el-submenu index="1">
             <template slot="title">
               <img src="../../assets/images/organization.svg" width="14" style="margin-right: 5px" />
@@ -10,7 +10,7 @@
             </template>
             <el-menu-item-group>
               <el-menu-item index="/Home/Organization/CompanyList">单位设置</el-menu-item>
-              <el-menu-item index="department">部门设置</el-menu-item>
+              <el-menu-item index="/Home/Organization/Department">部门设置</el-menu-item>
               <el-menu-item index="workcity">工作城市</el-menu-item>
               <el-menu-item index="structure/1">组织架构图</el-menu-item>
               <el-menu-item index="structure/2">组织汇报图</el-menu-item>
@@ -41,7 +41,11 @@
       </nav>
     </section>
     <div class="right">
-      <aside>
+      <aside v-if="$route.path === '/Home/Organization'">
+        <DefaultPage></DefaultPage>
+      </aside>
+      <aside v-else>
+        <!-- <aside v-show="$route.path !== '/Home/Organization'"> -->
         <keep-alive>
           <router-view></router-view>
         </keep-alive>
@@ -51,12 +55,15 @@
 </template>
 
 <script>
+import DefaultPage from './DefaultPage.vue';
 export default {
   data() {
     return {};
   },
 
-  components: {},
+  components: {
+    DefaultPage,
+  },
 
   computed: {},
 
@@ -85,6 +92,7 @@ div {
       width: 10%;
       min-width: 150px;
       position: fixed;
+      padding-top: 60px;
       .el-menu-vertical-demo {
         height: 100vh;
       }
@@ -92,9 +100,13 @@ div {
   }
   .right {
     overflow: hidden;
+    background-color: #fff;
+    height: 100vh;
+    padding-top: 60px;
     aside {
       float: left;
-      width: 88%;
+      width: 100%;
+      padding: 20px;
       // margin-left: 10%;
     }
   }
