@@ -160,7 +160,11 @@ export default {
 
   computed: {},
 
-  mounted() {},
+  mounted() {
+    this.$api.testApi().then(res => {
+      console.log('res', res);
+    });
+  },
 
   methods: {
     goMatterDetail(derection) {

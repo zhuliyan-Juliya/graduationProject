@@ -2,6 +2,7 @@ import Vue from 'vue';
 import App from './App.vue';
 import router from './router';
 import store from './store';
+import api from './axios/api'
 
 // 浏览器样式初始化、基础样式
 import './assets/css/initialize.css'
@@ -18,7 +19,7 @@ import shortcut from './components/shortcutComponents/index';
 Vue.use(cardC)
 Vue.use(cardT)
 Vue.use(shortcut)
-
+Vue.prototype.$api = api
 
 new Vue({
     router,

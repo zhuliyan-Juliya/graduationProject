@@ -15,7 +15,13 @@ module.exports = {
         hot: true, // 热更新
         host: 'localhost',
         port: 3000,
-        contentBase: './dist'
+        contentBase: './dist',
+        proxy: {
+            "/test": {
+                target: "http://localhost:5000/",
+                changeOrigin: true
+            }
+        },
     },
     resolve: {
         extensions: ['.js', '.json', '.vue'],
