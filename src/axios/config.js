@@ -51,5 +51,29 @@ export default {
           reject(error)
         })
     })
+  },
+  askDelete: function (url, queryInfo) {
+    return new Promise((resolve, reject) => {
+      axios
+        .delete(url, { data: queryInfo })
+        .then(response => {
+          resolve(response.data)
+        })
+        .catch(error => {
+          reject(error)
+        })
+    })
+  },
+  askPut: function (url, queryInfo) {
+    return new Promise((resolve, reject) => {
+      axios
+        .put(url, queryInfo)
+        .then(response => {
+          resolve(response.data)
+        })
+        .catch(error => {
+          reject(error)
+        })
+    })
   }
 }

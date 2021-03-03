@@ -2,12 +2,12 @@
   <div>
     <el-card shadow="hover">
       <el-row style="padding-bottom: 15px">
-        <el-button type="primary" icon="el-icon-plus" @click="newCompany">新增</el-button>
+        <el-button type="primary" icon="el-icon-plus" @click="newCompany()">新增</el-button>
         <el-button>子公司排序</el-button>
         <el-button>部门排序</el-button>
       </el-row>
 
-      <el-table :data="tableData" ref="multipleTable" style="width: 100%">
+      <el-table :data="tableData" ref="multipleTable" style="width: 100%" v-loading="tableLoading">
         <el-table-column type="selection" width="55"> </el-table-column>
         <el-table-column prop="name" label="名称" width="150"> </el-table-column>
         <el-table-column prop="short_name" label="单位简称"> </el-table-column>
@@ -25,7 +25,7 @@
           <template slot-scope="scope">
             <el-button @click="newCompany(scope.row)" type="text" size="small">编辑</el-button>
             <el-button type="text" size="small">禁用</el-button>
-            <el-button type="text" size="small" style="color: #ff8c00">删除</el-button>
+            <el-button type="text" size="small" style="color: #ff8c00" @click="deleteCompany(scope.row._id)">删除</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -36,12 +36,12 @@
         <el-row>
           <el-col :span="12">
             <el-form-item label="名称：">
-              <el-input v-model.trim.number="itemInfo.name" clearable style="width: 300px"></el-input>
+              <el-input v-model.trim="itemInfo.name" clearable style="width: 300px"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="单位简称：">
-              <el-input v-model.trim.number="itemInfo.rebates" clearable style="width: 300px"></el-input>
+              <el-input v-model.trim="itemInfo.short_name" clearable style="width: 300px"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="12">
@@ -85,6 +85,7 @@ export default {
   data() {
     return {
       DialogFlag: false,
+      tableLoading: false,
       tableData: [
         {
           company_id: 4716,
@@ -122,14 +123,15 @@ export default {
       schemeOptions: [{ value: '', label: '暂无数据', disable: true }],
     };
   },
-  mounted() {},
+  mounted() {
+    this.getCompanyList();
+  },
   methods: {
     newCompany(editContent) {
       if (!!editContent) {
         // 编辑
         this.editFlag = true;
         this.itemInfo = JSON.parse(JSON.stringify(editContent));
-        console.log('this.itemInfo', this.itemInfo);
       } else {
         this.editFlag = false;
         this.itemInfo = JSON.parse(JSON.stringify(this.sourceData));
@@ -140,7 +142,38 @@ export default {
       this.DialogFlag = false;
       this.itemInfo = {};
     },
-    passConfirm() {},
+    passConfirm() {
+      this.DialogFlag = false;
+      if (this.editFlag) {
+        this.$api.editCompany(this.itemInfo).then(res => {
+          if (res.success) {
+            this.getCompanyList();
+          }
+        });
+      } else {
+        this.$api.creatCompany(this.itemInfo).then(res => {
+          if (res.success) {
+            this.getCompanyList();
+          }
+        });
+      }
+    },
+    getCompanyList() {
+      this.tableLoading = true;
+      this.$api.getCompanyList().then(res => {
+        this.tableLoading = false;
+        if (res.success) {
+          this.tableData = res.data;
+        }
+      });
+    },
+    deleteCompany(id) {
+      this.$api.deleteCompany({ id: id }).then(res => {
+        if (res.success) {
+          this.getCompanyList();
+        }
+      });
+    },
     toggleSelection(rows) {
       if (rows) {
         rows.forEach(row => {

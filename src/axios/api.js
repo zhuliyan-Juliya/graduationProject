@@ -1,14 +1,13 @@
 // 所有接口
 import ask from "./config.js";
+import organizationApi from './organizationApi'
 
 let baseApiUrl = '';
 
 
+// 基础api
+let baseApi = {
 
-let configureApi = {
-  testApi (params) {
-    return ask.askGet(baseApiUrl + "/test/about/hh", params);
-  },
 };
 
-export default configureApi
+export default Object.assign({}, baseApi, organizationApi)
