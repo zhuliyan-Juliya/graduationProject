@@ -28,6 +28,11 @@ export default [
             name: 'Department',
             component: () => import('../views/organization/Department.vue'),
           },
+          {
+            path: 'Workcity',
+            name: 'Workcity',
+            component: () => import('../views/organization/CityList.vue'),
+          },
         ]
       },
       // 员工管理

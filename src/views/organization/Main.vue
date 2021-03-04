@@ -11,7 +11,7 @@
             <el-menu-item-group>
               <el-menu-item index="/Home/Organization/CompanyList">单位设置</el-menu-item>
               <el-menu-item index="/Home/Organization/Department">部门设置</el-menu-item>
-              <el-menu-item index="workcity">工作城市</el-menu-item>
+              <el-menu-item index="/Home/Organization/Workcity">工作城市</el-menu-item>
               <el-menu-item index="structure/1">组织架构图</el-menu-item>
               <el-menu-item index="structure/2">组织汇报图</el-menu-item>
             </el-menu-item-group>

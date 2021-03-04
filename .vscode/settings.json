@@ -7,7 +7,8 @@
     "jjsg",
     "jobsmanage",
     "realname",
-    "state"
+    "state",
+    "workcity"
   ],
   // 格式化设置
   "editor.formatOnSave": true,
