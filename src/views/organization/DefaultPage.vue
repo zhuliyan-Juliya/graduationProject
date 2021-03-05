@@ -64,9 +64,9 @@ export default {
           size: 60,
           children: [
             { name: '单位设置', url: '/Home/Organization/CompanyList' },
-            { name: '部门设置', url: '' },
-            { name: '组织架构图', url: '' },
-            { name: '组织汇报图', url: '' },
+            { name: '部门设置', url: '/Home/Organization/Department' },
+            { name: '组织架构图', url: '/Home/Organization/Structure/1' },
+            { name: '组织汇报图', url: '/Home/Organization/Structure/2' },
           ],
         },
         {
@@ -74,9 +74,9 @@ export default {
           title: '职位管理',
           size: 60,
           children: [
-            { name: '职类管理', url: '' },
-            { name: '职位管理', url: '' },
-            { name: '职位体系', url: '' },
+            { name: '职类管理', url: '/Home/Organization/Category' },
+            { name: '职位管理', url: '/Home/Organization/Designation' },
+            { name: '职位体系', url: '/Home/Organization/PositionSystem' },
           ],
         },
         {
@@ -84,15 +84,15 @@ export default {
           title: '编制管理',
           size: 60,
           children: [
-            { name: '编制管理', url: '' },
-            { name: '组织编制图', url: '' },
+            { name: '编制管理', url: '/Home/Organization/Establishment' },
+            { name: '组织编制图', url: '/Home/Organization/Structure/3' },
           ],
         },
         {
           pic: require('images/organization/pic_5.png'),
           title: '工作城市',
           size: 60,
-          children: [{ name: '工作城市', url: '' }],
+          children: [{ name: '工作城市', url: '/Home/Organization/Workcity' }],
         },
       ],
     };

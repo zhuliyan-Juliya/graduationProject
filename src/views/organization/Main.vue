@@ -2,18 +2,19 @@
   <div>
     <section>
       <nav>
-        <el-menu default-active="1" class="el-menu-vertical-demo" router @open="handleOpen" @close="handleClose" background-color="#F2F6F8" text-color="#2F3647 " active-text-color="#1270EC">
+        <el-menu :default-active="$route.path" class="el-menu-vertical-demo" router @open="handleOpen" @close="handleClose" background-color="#F2F6F8" text-color="#2F3647 " active-text-color="#1270EC">
           <el-submenu index="1">
             <template slot="title">
               <img src="../../assets/images/organization.svg" width="14" style="margin-right: 5px" />
+
               <span class="menu-title">组织管理</span>
             </template>
             <el-menu-item-group>
               <el-menu-item index="/Home/Organization/CompanyList">单位设置</el-menu-item>
               <el-menu-item index="/Home/Organization/Department">部门设置</el-menu-item>
               <el-menu-item index="/Home/Organization/Workcity">工作城市</el-menu-item>
-              <el-menu-item index="structure/1">组织架构图</el-menu-item>
-              <el-menu-item index="structure/2">组织汇报图</el-menu-item>
+              <el-menu-item index="/Home/Organization/Structure/1">组织架构图</el-menu-item>
+              <el-menu-item index="/Home/Organization/Structure/2">组织汇报图</el-menu-item>
             </el-menu-item-group>
           </el-submenu>
           <el-submenu index="2">
@@ -22,9 +23,9 @@
               <span class="menu-title">职位管理</span>
             </template>
             <el-menu-item-group>
-              <el-menu-item index="category">职类管理</el-menu-item>
-              <el-menu-item index="designation">职位管理</el-menu-item>
-              <el-menu-item index="position_system">职位体系</el-menu-item>
+              <el-menu-item index="/Home/Organization/Category">职类管理</el-menu-item>
+              <el-menu-item index="/Home/Organization/Designation">职位管理</el-menu-item>
+              <el-menu-item index="/Home/Organization/PositionSystem">职位体系</el-menu-item>
             </el-menu-item-group>
           </el-submenu>
           <el-submenu index="3">
@@ -33,8 +34,8 @@
               <span class="menu-title">编制管理</span>
             </template>
             <el-menu-item-group>
-              <el-menu-item index="establishment">编制管理</el-menu-item>
-              <el-menu-item index="structure/3">组织编制图</el-menu-item>
+              <el-menu-item index="/Home/Organization/Establishment">编制管理</el-menu-item>
+              <el-menu-item index="/Home/Organization/Structure/3">组织编制图</el-menu-item>
             </el-menu-item-group>
           </el-submenu>
         </el-menu>

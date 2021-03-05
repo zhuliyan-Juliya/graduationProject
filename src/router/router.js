@@ -33,6 +33,21 @@ export default [
             name: 'Workcity',
             component: () => import('../views/organization/CityList.vue'),
           },
+          {
+            path: 'Structure/1',
+            name: 'Structure1',
+            component: () => import('../views/organization/Structure1.vue'),
+          },
+          {
+            path: 'Structure/2',
+            name: 'Structure2',
+            component: () => import('../views/organization/Structure2.vue'),
+          },
+          {
+            path: 'Category',
+            name: 'Category',
+            component: () => import('../views/organization/Category.vue'),
+          },
         ]
       },
       // 员工管理

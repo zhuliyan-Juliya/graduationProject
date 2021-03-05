@@ -16,6 +16,9 @@ let organizationApi = {
   editCompany (params) {
     return ask.askPut(baseApiUrl + "/api/company/edit", params);
   },
+  toggleCompanyStatus (params) {
+    return ask.askPost(baseApiUrl + "/api/company/status", params);
+  },
   // 城市
   getCityList (params) {
     return ask.askGet(baseApiUrl + "/api/city/list", params);
@@ -28,6 +31,41 @@ let organizationApi = {
   },
   editCity (params) {
     return ask.askPut(baseApiUrl + "/api/city/edit", params);
+  },
+  toggleCityStatus (params) {
+    return ask.askPost(baseApiUrl + "/api/city/status", params);
+  },
+  // 部门
+  getDepartmentList (params) {
+    return ask.askGet(baseApiUrl + "/api/department/list", params);
+  },
+  creatDepartment (params) {
+    return ask.askPost(baseApiUrl + "/api/department/add", params);
+  },
+  deleteDepartment (params) {
+    return ask.askDelete(baseApiUrl + "/api/department/delete", params);
+  },
+  editDepartment (params) {
+    return ask.askPut(baseApiUrl + "/api/department/edit", params);
+  },
+  toggleDepartmentStatus (params) {
+    return ask.askPost(baseApiUrl + "/api/department/status", params);
+  },
+  // 职类管理
+  getCategoryList (params) {
+    return ask.askGet(baseApiUrl + "/api/category/list", params);
+  },
+  creatCategory (params) {
+    return ask.askPost(baseApiUrl + "/api/category/add", params);
+  },
+  deleteCategory (params) {
+    return ask.askDelete(baseApiUrl + "/api/category/delete", params);
+  },
+  editCategory (params) {
+    return ask.askPut(baseApiUrl + "/api/category/edit", params);
+  },
+  toggleCategoryStatus (params) {
+    return ask.askPost(baseApiUrl + "/api/category/status", params);
   },
 }
 

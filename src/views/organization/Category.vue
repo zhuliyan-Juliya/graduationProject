@@ -7,7 +7,8 @@
 
       <el-table :data="tableData" ref="multipleTable" style="width: 100%" v-loading="tableLoading">
         <el-table-column type="selection" width="55"> </el-table-column>
-        <el-table-column prop="region_name" label="工作城市" width="150"> </el-table-column>
+        <el-table-column prop="name" label="职类" width="150"> </el-table-column>
+        <el-table-column prop="parent_name" label="上级职类" width="150"> </el-table-column>
         <el-table-column prop="status" label="状态">
           <template slot-scope="scope">
             <p v-if="scope.row.status === 0">
@@ -38,8 +39,15 @@
       <el-form :value="itemInfo" class="wid-100" inline label-position="right" label-width="120px">
         <el-row>
           <el-col :span="12">
-            <el-form-item label="工作城市：">
-              <el-input v-model.trim="itemInfo.region_name" clearable style="width: 300px"></el-input>
+            <el-form-item label="职类名称：">
+              <el-input v-model.trim="itemInfo.name" clearable style="width: 300px"></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="上级职类：">
+              <el-select v-model="itemInfo.pid" style="width: 300px" clearable>
+                <el-option v-for="(item, index) in parrentList" :key="index" :value="item.value" :label="item.label" />
+              </el-select>
             </el-form-item>
           </el-col>
           <el-col :span="12">
@@ -69,17 +77,13 @@ export default {
       sourceData: {
         status: 1,
       },
-      typeList: [
-        { value: '总部', label: '总部' },
-        { value: '分部', label: '分部' },
-        { value: '中心', label: '中心' },
-      ],
+      parrentList: [],
       parentOptions: [{ value: 'testCompany', label: 'testCompany' }],
       schemeOptions: [{ value: '', label: '暂无数据', disable: true }],
     };
   },
   mounted() {
-    this.getWorkCityList();
+    this.getCategoryList();
   },
   methods: {
     toggleStatus(item) {
@@ -87,9 +91,9 @@ export default {
         status: Number(!item.status),
         id: item._id,
       };
-      this.$api.toggleCityStatus(obj).then(res => {
+      this.$api.toggleCategoryStatus(obj).then(res => {
         if (res.success) {
-          this.getWorkCityList();
+          this.getCategoryList();
         }
       });
     },
@@ -112,32 +116,41 @@ export default {
     passConfirm() {
       this.DialogFlag = false;
       if (this.editFlag) {
-        this.$api.editCity(this.itemInfo).then(res => {
+        this.$api.editCategory(this.itemInfo).then(res => {
           if (res.success) {
-            this.getWorkCityList();
+            this.getCategoryList();
           }
         });
       } else {
-        this.$api.creatCity(this.itemInfo).then(res => {
+        this.$api.creatCategory(this.itemInfo).then(res => {
           if (res.success) {
-            this.getWorkCityList();
+            this.getCategoryList();
           }
         });
       }
     },
-    getWorkCityList() {
+    getCategoryList() {
       this.tableLoading = true;
-      this.$api.getCityList().then(res => {
+      this.$api.getCategoryList().then(res => {
         this.tableLoading = false;
         if (res.success) {
           this.tableData = res.data;
+          this.tableData.forEach(item => {
+            if (item.parent) {
+              item.parent_name = item.parent.name;
+            }
+          });
+          console.log('res.data', res.data);
+          this.parrentList = res.data.map(item => {
+            return { label: item.name, value: item._id };
+          });
         }
       });
     },
     deleteCity(id) {
-      this.$api.deleteCity({ id: id }).then(res => {
+      this.$api.deleteCategory({ id: id }).then(res => {
         if (res.success) {
-          this.getWorkCityList();
+          this.getCategoryList();
         }
       });
     },
