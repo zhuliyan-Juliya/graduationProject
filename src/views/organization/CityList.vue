@@ -76,6 +76,7 @@ export default {
       if (!!editContent) {
         // 编辑
         this.editFlag = true;
+
         this.itemInfo = JSON.parse(JSON.stringify(editContent));
       } else {
         this.editFlag = false;
