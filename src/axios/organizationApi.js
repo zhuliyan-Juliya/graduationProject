@@ -67,6 +67,22 @@ let organizationApi = {
   toggleCategoryStatus (params) {
     return ask.askPost(baseApiUrl + "/api/category/status", params);
   },
+  // 职位管理
+  getDesignationList (params) {
+    return ask.askGet(baseApiUrl + "/api/designation/list", params);
+  },
+  creatDesignation (params) {
+    return ask.askPost(baseApiUrl + "/api/designation/add", params);
+  },
+  deleteDesignation (params) {
+    return ask.askDelete(baseApiUrl + "/api/designation/delete", params);
+  },
+  editDesignation (params) {
+    return ask.askPut(baseApiUrl + "/api/designation/edit", params);
+  },
+  toggleDesignationStatus (params) {
+    return ask.askPost(baseApiUrl + "/api/designation/status", params);
+  },
 }
 
 export default organizationApi

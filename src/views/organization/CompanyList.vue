@@ -56,21 +56,21 @@
           </el-col>
           <el-col :span="12">
             <el-form-item label="类型：">
-              <el-select v-model="itemInfo.typeText" style="width: 300px">
+              <el-select v-model="itemInfo.typeText" style="width: 300px" clearable>
                 <el-option v-for="(item, index) in typeList" :key="index" :value="item.value" :label="item.label" />
               </el-select>
             </el-form-item>
           </el-col>
-          <el-col :span="12">
+          <el-col :span="12" v-if="itemInfo.typeText != '总部'">
             <el-form-item label="上级：">
-              <el-select v-model="itemInfo.parent_name" style="width: 300px">
+              <el-select v-model="itemInfo.parent_name" style="width: 300px" clearable>
                 <el-option v-for="(item, index) in parentOptions" :key="index" :value="item.value" :label="item.label" />
               </el-select>
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="职位体系：">
-              <el-select v-model="itemInfo.scheme" style="width: 300px">
+              <el-select v-model="itemInfo.scheme" style="width: 300px" clearable>
                 <el-option v-for="(item, index) in schemeOptions" :key="index" :disabled="item.disable" :value="item.value" :label="item.label" />
               </el-select>
             </el-form-item>
@@ -166,6 +166,9 @@ export default {
     },
     passConfirm() {
       this.DialogFlag = false;
+      if (this.itemInfo.typeText == '总部') {
+        this.itemInfo.parent_name = '';
+      }
       if (this.editFlag) {
         this.$api.editCompany(this.itemInfo).then(res => {
           if (res.success) {

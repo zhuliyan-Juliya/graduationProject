@@ -48,6 +48,11 @@ export default [
             name: 'Category',
             component: () => import('../views/organization/Category.vue'),
           },
+          {
+            path: 'Designation',
+            name: 'Designation',
+            component: () => import('../views/organization/Designation.vue'),
+          },
         ]
       },
       // 员工管理

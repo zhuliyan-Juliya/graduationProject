@@ -59,24 +59,24 @@
         <el-row>
           <el-col :span="12">
             <el-form-item label="名称：">
-              <el-input v-model.trim.number="itemInfo.name" clearable style="width: 300px"></el-input>
+              <el-input v-model.trim="itemInfo.name" clearable style="width: 300px" placeholder="请输入部门名称"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="单位简称：">
-              <el-input v-model.trim.number="itemInfo.rebates" clearable style="width: 300px"></el-input>
+              <el-input v-model.trim="itemInfo.rebates" clearable style="width: 300px" placeholder="请输入部门简称"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="类型：">
-              <el-select v-model="itemInfo.typeText" style="width: 300px">
+              <el-select v-model="itemInfo.typeText" style="width: 300px" clearable>
                 <el-option v-for="(item, index) in typeList" :key="index" :value="item.value" :label="item.label" />
               </el-select>
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="上级：">
-              <el-select v-model="itemInfo.parent_name" style="width: 300px">
+              <el-select v-model="itemInfo.parent_name" style="width: 300px" clearable>
                 <el-option v-for="(item, index) in parentOptions" :key="index" :value="item.value" :label="item.label" />
               </el-select>
             </el-form-item>
