@@ -68,7 +68,9 @@ export default {
 
   computed: {},
 
-  mounted() {},
+  mounted() {
+    console.log('this.bigScreen', this.screenWidth)
+  },
 
   methods: {
     handleOpen(key, keyPath) {

@@ -2,7 +2,8 @@ import Vue from 'vue';
 import App from './App.vue';
 import router from './router';
 import store from './store';
-import api from './axios/api'
+import api from './axios/api';
+import mixins from './mixins/mixins'
 
 // 浏览器样式初始化、基础样式
 import './assets/css/initialize.css'
@@ -11,7 +12,7 @@ import './assets/css/function.less'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 Vue.use(ElementUI);
-
+Vue.mixin(mixins)
 /* 自定义组件全局注册 - 可以搞成自动化提取 */
 import cardC from './components/cardComponents/index';
 import cardT from './components/cardTitleComponents/index';
