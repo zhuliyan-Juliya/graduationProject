@@ -1,6 +1,6 @@
 // 所有接口
-import ask from "./config.js";
 import organizationApi from './organizationApi'
+import staffApi from './staffApi'
 
 let baseApiUrl = '';
 
@@ -10,4 +10,4 @@ let baseApi = {
 
 };
 
-export default Object.assign({}, baseApi, organizationApi)
+export default Object.assign({}, baseApi, organizationApi, staffApi)

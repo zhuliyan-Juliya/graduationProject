@@ -7,17 +7,35 @@
 
       <el-table :data="tableData" ref="multipleTable" style="width: 100%" v-loading="tableLoading">
         <el-table-column type="selection" width="55"> </el-table-column>
-        <el-table-column prop="name" label="职位" width="150">
+        <el-table-column prop="designation" label="职位" width="150"> </el-table-column>
+        <el-table-column prop="parent_name" label="所属部门" width="150">
           <template slot-scope="scope">
-            <a @click="newDesignation(scope.row)" class="color-ac pointer">
-              {{ scope.row.name }}
-            </a>
+            <div>
+              {{ scope.row.department ? scope.row.department.name : '' }}
+            </div>
           </template>
         </el-table-column>
-        <el-table-column prop="parent_name" label="所属部门" width="150"> </el-table-column>
-        <el-table-column prop="parent_name" label="所属公司/中心" width="150"> </el-table-column>
-        <el-table-column prop="parent_name" label="上级职位" width="150"> </el-table-column>
-        <el-table-column prop="parent_name" label="职类" width="150"> </el-table-column>
+        <el-table-column prop="parent_name" label="所属公司/中心" width="150">
+          <template slot-scope="scope">
+            <div>
+              {{ scope.row.department ? scope.row.department.company.name : '' }}
+            </div>
+          </template>
+        </el-table-column>
+        <el-table-column prop="parent_name" label="上级职位" width="150">
+          <template slot-scope="scope">
+            <div>
+              {{ scope.row.parentJobClass ? scope.row.parentJobClass.designation : '' }}
+            </div>
+          </template>
+        </el-table-column>
+        <el-table-column prop="parent_name" label="职类" width="150">
+          <template slot-scope="scope">
+            <div>
+              {{ scope.row.jobClass ? scope.row.jobClass.name : '' }}
+            </div>
+          </template>
+        </el-table-column>
         <el-table-column prop="parent_name" label="默认职级" width="150"> </el-table-column>
         <el-table-column prop="parent_name" label="职位人数" width="150"> </el-table-column>
         <el-table-column prop="parent_name" label="编制人数" width="150"> </el-table-column>
@@ -41,7 +59,7 @@
             <el-button type="text" size="small" @click="toggleStatus(scope.row)">
               {{ scope.row.status === 0 ? '启用' : '禁用' }}
             </el-button>
-            <el-button type="text" size="small" style="color: #ff8c00" @click="deleteCity(scope.row._id)">删除</el-button>
+            <el-button type="text" size="small" style="color: #ff8c00" @click="deleteDesignation(scope.row._id)">删除</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -56,23 +74,15 @@
             </el-form-item>
           </el-col>
           <el-col :span="12">
+            <el-form-item label="状态：">
+              <el-radio v-model="itemInfo.status" :label="1">启用</el-radio>
+              <el-radio v-model="itemInfo.status" :label="0">禁用</el-radio>
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
             <el-form-item label="所属部门：">
               <el-select v-model="itemInfo.deptID" style="width: 300px" clearable>
-                <el-option v-for="(item, index) in parrentList" :key="index" :value="item.value" :label="item.label" />
-              </el-select>
-            </el-form-item>
-          </el-col>
-          <el-col :span="12">
-            <el-form-item label="上级职位部门：">
-              <el-select v-model="itemInfo.superiorDeptID" style="width: 300px" clearable>
-                <el-option v-for="(item, index) in parrentList" :key="index" :value="item.value" :label="item.label" />
-              </el-select>
-            </el-form-item>
-          </el-col>
-          <el-col :span="12">
-            <el-form-item label="上级职位：">
-              <el-select v-model="itemInfo.pid" style="width: 300px" clearable>
-                <el-option v-for="(item, index) in parrentList" :key="index" :value="item.value" :label="item.label" />
+                <el-option v-for="(item, index) in departmentOptions" :key="index" :value="item.value" :label="item.label" />
               </el-select>
             </el-form-item>
           </el-col>
@@ -84,11 +94,20 @@
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="状态：">
-              <el-radio v-model="itemInfo.status" :label="1">启用</el-radio>
-              <el-radio v-model="itemInfo.status" :label="0">禁用</el-radio>
+            <el-form-item label="上级职位部门：">
+              <el-select v-model="itemInfo.superiorDeptID" style="width: 300px" clearable>
+                <el-option v-for="(item, index) in departmentOptions" :key="index" :value="item.value" :label="item.label" />
+              </el-select>
             </el-form-item>
           </el-col>
+          <el-col :span="12">
+            <el-form-item label="上级职位：">
+              <el-select v-model="itemInfo.pid" style="width: 300px" clearable>
+                <el-option v-for="(item, index) in parrentList" :key="index" :value="item.value" :label="item.label" />
+              </el-select>
+            </el-form-item>
+          </el-col>
+
           <el-col :span="12">
             <el-form-item label="岗位说明书：">
               <el-input v-model="itemInfo.desc" type="textarea" :rows="3" style="width: 300px" placeholder="请输入..."></el-input>
@@ -116,23 +135,32 @@ export default {
         status: 1,
       },
       parrentList: [],
-      parentOptions: [{ value: 'testCompany', label: 'testCompany' }],
-      schemeOptions: [{ value: '', label: '暂无数据', disable: true }],
+      departmentOptions: [],
       jobCategory: [],
     };
   },
   created() {
     this.getDesignationList();
     this.getJobCategory();
+    this.getDepartmentList();
   },
   mounted() {},
   methods: {
+    getDepartmentList() {
+      this.$api.getDepartmentList().then(res => {
+        if (res.success) {
+          this.departmentOptions = res.data.map(item => {
+            return { label: item.name, value: item._id };
+          });
+        }
+      });
+    },
     // 获取职类信息
     getJobCategory() {
       this.$api.getCategoryList().then(res => {
         if (res.success) {
           this.jobCategory = res.data.map(item => {
-            return { label: item.name, value: item.pid };
+            return { label: item.name, value: item._id };
           });
         }
       });
@@ -142,7 +170,7 @@ export default {
         status: Number(!item.status),
         id: item._id,
       };
-      this.$api.toggleCategoryStatus(obj).then(res => {
+      this.$api.toggleDesignationStatus(obj).then(res => {
         if (res.success) {
           this.getDesignationList();
         }
@@ -156,18 +184,18 @@ export default {
         this.itemInfo = JSON.parse(JSON.stringify(editContent));
       } else {
         this.editFlag = false;
+        console.log('default', this.sourceData);
         this.itemInfo = JSON.parse(JSON.stringify(this.sourceData));
       }
       this.DialogFlag = true;
     },
     passCancel() {
       this.DialogFlag = false;
-      this.itemInfo = {};
     },
     passConfirm() {
       this.DialogFlag = false;
       if (this.editFlag) {
-        this.$api.editCategory(this.itemInfo).then(res => {
+        this.$api.editDesignation(this.itemInfo).then(res => {
           if (res.success) {
             this.getDesignationList();
           }
@@ -182,14 +210,18 @@ export default {
     },
     getDesignationList() {
       this.tableLoading = true;
-      // this.$api.getDesignationList().then(res => {
-      this.tableLoading = false;
-      //   if (res.success) {
-      //   }
-      // });
+      this.$api.getDesignationList().then(res => {
+        this.tableLoading = false;
+        if (res.success) {
+          this.tableData = res.data;
+          this.parrentList = res.data.map(item => {
+            return { label: item.designation, value: item._id };
+          });
+        }
+      });
     },
-    deleteCity(id) {
-      this.$api.deleteCategory({ id: id }).then(res => {
+    deleteDesignation(id) {
+      this.$api.deleteDesignation({ id: id }).then(res => {
         if (res.success) {
           this.getDesignationList();
         }
