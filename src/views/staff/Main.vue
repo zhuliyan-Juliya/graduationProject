@@ -10,7 +10,7 @@
               <span class="menu-title">员工信息</span>
             </template>
             <el-menu-item-group>
-              <el-menu-item index="/Home/Staff/CompanyList">员工花名册</el-menu-item>
+              <el-menu-item index="/Home/Staff/Employee">员工花名册</el-menu-item>
               <el-menu-item index="/Home/Staff/Department">人才统计</el-menu-item>
               <el-menu-item index="/Home/Staff/Workcity">档案统计</el-menu-item>
               <el-menu-item index="/Home/Staff/Structure/1">邀请员工</el-menu-item>
