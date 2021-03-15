@@ -4,20 +4,20 @@ let baseApiUrl = ''
 
 let helper = {
 	// 员工
-	getCompanyList (params) {
-		return ask.askGet(baseApiUrl + "/api/company/list", params);
+	getEmployeeList (params) {
+		return ask.askGet(baseApiUrl + "/api/employee/list", params);
 	},
-	creatCompany (params) {
-		return ask.askPost(baseApiUrl + "/api/company/add", params);
+	creatEmployee (params) {
+		return ask.askPost(baseApiUrl + "/api/employee/add", params);
 	},
-	deleteCompany (params) {
-		return ask.askDelete(baseApiUrl + "/api/company/delete", params);
+	deleteEmployee (params) {
+		return ask.askDelete(baseApiUrl + "/api/employee/delete", params);
 	},
-	editCompany (params) {
-		return ask.askPut(baseApiUrl + "/api/company/edit", params);
+	editEmployee (params) {
+		return ask.askPut(baseApiUrl + "/api/employee/edit", params);
 	},
-	toggleCompanyStatus (params) {
-		return ask.askPost(baseApiUrl + "/api/company/status", params);
+	toggleEmployeeStatus (params) {
+		return ask.askPost(baseApiUrl + "/api/employee/status", params);
 	}
 }
 

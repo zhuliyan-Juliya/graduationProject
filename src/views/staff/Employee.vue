@@ -8,23 +8,23 @@
       <el-table :data="tableData" ref="multipleTable" style="width: 100%" v-loading="tableLoading">
         <el-table-column type="selection" width="55"> </el-table-column>
         <el-table-column prop="name" label="姓名" width="150"> </el-table-column>
-        <el-table-column prop="parent_name" label="头像" width="150"> </el-table-column>
-        <el-table-column prop="parent_name" label="部门" width="150"> </el-table-column>
-        <el-table-column prop="parent_name" label="职位" width="150"> </el-table-column>
-        <el-table-column prop="parent_name" label="工作城市" width="150"> </el-table-column>
-        <el-table-column prop="parent_name" label="手机" width="150"> </el-table-column>
-        <el-table-column prop="parent_name" label="企业邮箱" width="150"> </el-table-column>
+        <el-table-column prop="avtr" label="头像" width="150"> </el-table-column>
+        <el-table-column prop="department_name" label="部门" width="150"> </el-table-column>
+        <el-table-column prop="job_category_name" label="职位" width="150"> </el-table-column>
+        <el-table-column prop="city_name" label="工作城市" width="150"> </el-table-column>
+        <el-table-column prop="phone" label="手机" width="150"> </el-table-column>
+        <el-table-column prop="company_emile" label="企业邮箱" width="150"> </el-table-column>
         <el-table-column prop="parent_name" label="司龄" width="150"> </el-table-column>
         <el-table-column prop="status" label="状态">
           <template slot-scope="scope">
-            <p v-if="scope.row.status === 0">
-              <span class="forbidden">
-                <span>禁用</span>
+            <p v-if="scope.row.staff_status === '1'">
+              <span class="success">
+                <span>正式</span>
               </span>
             </p>
             <p v-else>
-              <span class="startUse">
-                <span>启用</span>
+              <span class="warning">
+                <span>试用</span>
               </span>
             </p>
           </template>
@@ -33,6 +33,7 @@
         <el-table-column fixed="right" label="操作" min-width="120">
           <template slot-scope="scope">
             <el-button @click="newWorkCity(scope.row)" type="text" size="small">编辑</el-button>
+            <el-button @click="deleteEmployee(scope.row)" type="text" size="small">删除</el-button>
             <el-button type="text" size="small" style="color: #ff8c00" @click="deleteCity(scope.row._id)">办理离职</el-button>
           </template>
         </el-table-column>
@@ -57,11 +58,11 @@
                 <el-input v-model.trim="staffInfo.show_name" clearable style="width: 24vw"></el-input>
               </el-form-item>
               <el-form-item label="性别：">
-                <el-radio v-model="staffInfo.sex" :value="1">男</el-radio>
-                <el-radio v-model="staffInfo.sex" :value="0">女</el-radio>
+                <el-radio v-model="staffInfo.sex" :label="1">男</el-radio>
+                <el-radio v-model="staffInfo.sex" :label="0">女</el-radio>
               </el-form-item>
               <el-form-item label="手机号：">
-                <el-input v-model.trim.number="staffInfo.phone" placeholder="境外手机请加国际电话区号，例：862-123456" clearable style="width: 24vw"></el-input>
+                <el-input v-model.number="staffInfo.phone" placeholder="境外手机请加国际电话区号，例：862-123456" clearable style="width: 24vw"></el-input>
               </el-form-item>
               <el-form-item label="证件类型：">
                 <el-select v-model="staffInfo.card_type" style="width: 24vw" clearable>
@@ -151,7 +152,7 @@ export default {
       editFlag: false,
       staffInfo: {},
       sourceData: {
-        status: 1,
+        sex: 1,
       },
       parrentList: [],
       parentOptions: [{ value: 'testCompany', label: 'testCompany' }],
@@ -195,11 +196,6 @@ export default {
         { value: '7', label: '五年' },
         { value: '8', label: '六年' },
       ],
-      pickerOptions: {
-        disabledDate(time) {
-          return time.getTime() > Date.now();
-        },
-      },
       companyList: [],
       departmentList: [],
       categoryList: [],
@@ -208,29 +204,18 @@ export default {
     };
   },
   mounted() {
-    this.getCategoryList();
-    this.getSelectListOptions('getCompanyList').then(arr => {
-      this.companyList = arr.map(item => {
-        return { label: item.name, value: item._id };
-      });
-    });
-    this.getSelectListOptions('getDepartmentList').then(arr => {
-      this.departmentList = arr.map(item => {
-        return { label: item.name, value: item._id };
-      });
-    });
-    this.getSelectListOptions('getCategoryList').then(arr => {
-      this.categoryList = arr.map(item => {
-        return { label: item.name, value: item._id };
-      });
-    });
-    this.getSelectListOptions('getCityList').then(arr => {
-      this.cityList = arr.map(item => {
-        return { label: item.region_name, value: item._id };
-      });
-    });
+    this.getEmployeeList();
+    this.getChooseData();
   },
   methods: {
+    deleteEmployee(item) {
+      this.tableLoading = true;
+      this.$api.deleteEmployee({ id: item._id }).then(res => {
+        if (res.success) {
+          this.getEmployeeList();
+        }
+      });
+    },
     toggleStatus(item) {
       let obj = {
         status: Number(!item.status),
@@ -238,7 +223,7 @@ export default {
       };
       this.$api.toggleCategoryStatus(obj).then(res => {
         if (res.success) {
-          this.getCategoryList();
+          this.getEmployeeList();
         }
       });
     },
@@ -252,6 +237,7 @@ export default {
         this.editFlag = false;
         this.staffInfo = JSON.parse(JSON.stringify(this.sourceData));
       }
+      console.log('this.staffInfo', this.staffInfo);
       this.DialogFlag = true;
     },
     passCancel() {
@@ -263,26 +249,35 @@ export default {
       if (this.editFlag) {
         this.$api.editCategory(this.staffInfo).then(res => {
           if (res.success) {
-            this.getCategoryList();
+            this.getEmployeeList();
           }
         });
       } else {
-        this.$api.creatCategory(this.staffInfo).then(res => {
+        this.$api.creatEmployee(this.staffInfo).then(res => {
           if (res.success) {
-            this.getCategoryList();
+            this.getEmployeeList();
           }
         });
       }
     },
-    getCategoryList() {
+    getEmployeeList() {
       this.tableLoading = true;
-      this.$api.getCategoryList().then(res => {
+      this.$api.getEmployeeList().then(res => {
         this.tableLoading = false;
         if (res.success) {
           this.tableData = res.data;
           this.tableData.forEach(item => {
-            if (item.parent) {
-              item.parent_name = item.parent.name;
+            if (item.company) {
+              item.company_name = item.company.name;
+            }
+            if (item.city) {
+              item.city_name = item.city.region_name;
+            }
+            if (item.department) {
+              item.department_name = item.department.name;
+            }
+            if (item.category) {
+              item.job_category_name = item.category.name;
             }
           });
           console.log('res.data', res.data);
@@ -290,6 +285,28 @@ export default {
             return { label: item.name, value: item._id };
           });
         }
+      });
+    },
+    getChooseData() {
+      this.getSelectListOptions('getCompanyList').then(arr => {
+        this.companyList = arr.map(item => {
+          return { label: item.name, value: item._id };
+        });
+      });
+      this.getSelectListOptions('getDepartmentList').then(arr => {
+        this.departmentList = arr.map(item => {
+          return { label: item.name, value: item._id };
+        });
+      });
+      this.getSelectListOptions('getCategoryList').then(arr => {
+        this.categoryList = arr.map(item => {
+          return { label: item.name, value: item._id };
+        });
+      });
+      this.getSelectListOptions('getCityList').then(arr => {
+        this.cityList = arr.map(item => {
+          return { label: item.region_name, value: item._id };
+        });
       });
     },
     deleteCity(id) {
