@@ -66,6 +66,11 @@ export default [
 						name: 'Employee',
 						component: () => import('../views/staff/Employee.vue'),
 					},
+					{
+						path: 'Report',
+						name: 'Report',
+						component: () => import('../views/staff/Report.vue'),
+					},
 				]
 			},
 			// 考勤管理

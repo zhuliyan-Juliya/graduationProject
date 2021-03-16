@@ -39,8 +39,8 @@ export default {
           title: '员工信息',
           size: 60,
           children: [
-            { name: '员工花名册', url: '/Home/Staff/CompanyList' },
-            { name: '人才统计', url: '/Home/Staff/Department' },
+            { name: '员工花名册', url: '/Home/Staff/Employee' },
+            { name: '人才统计', url: '/Home/Staff/Report' },
             { name: '档案统计', url: '/Home/Staff/Structure/1' },
             { name: '邀请员工', url: '/Home/Staff/Structure/2' },
             { name: '员工审核', url: '/Home/Staff/Structure/2' },

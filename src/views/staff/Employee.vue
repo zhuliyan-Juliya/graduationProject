@@ -237,7 +237,6 @@ export default {
         this.editFlag = false;
         this.staffInfo = JSON.parse(JSON.stringify(this.sourceData));
       }
-      console.log('this.staffInfo', this.staffInfo);
       this.DialogFlag = true;
     },
     passCancel() {
@@ -280,7 +279,6 @@ export default {
               item.job_category_name = item.category.name;
             }
           });
-          console.log('res.data', res.data);
           this.parrentList = res.data.map(item => {
             return { label: item.name, value: item._id };
           });
