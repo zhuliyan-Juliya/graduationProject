@@ -2,9 +2,9 @@
   <div id="report">
     <el-card>
       <el-row>
-        <el-col :span="8">
-          <section>
-            <Pie :pieData="pieData"></Pie>
+        <el-col :span="8" >
+          <section style="height: 230px;">
+            <Pie :pieOptions="pieOptions"></Pie>
           </section>
         </el-col>
       </el-row>
@@ -17,7 +17,35 @@ export default {
   name: 'Report',
   data() {
     return {
-      pieData: [],
+      pieOptions: {
+        title: {
+          text: '员工性别分布',
+          left: 'left',
+        },
+        tooltip: {
+          trigger: 'item',
+        },
+        legend: {
+          orient: 'horizontal',
+          left: 'right',
+        },
+        series: [
+          {
+            name: '访问来源',
+            type: 'pie',
+            radius: ['40%', '70%'],
+            avoidLabelOverlap: false,
+            data: [],
+            emphasis: {
+              itemStyle: {
+                shadowBlur: 10,
+                shadowOffsetX: 0,
+                shadowColor: 'rgba(0, 0, 0, 0.5)',
+              },
+            },
+          },
+        ],
+      },
     };
   },
   mounted() {
@@ -31,7 +59,7 @@ export default {
             return item.sex == 0;
           }).length;
           let male = res.data.length - female;
-          this.pieData = [
+          this.pieOptions.series[0].data = [
             { value: female, name: '女' },
             { value: male, name: '男' },
           ];

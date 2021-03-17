@@ -2,7 +2,7 @@ import axios from "axios"
 
 // 创建实例
 const hotGame = axios.create({
-  // baseUrl: 
+  baseUrl: ''
 })
 // axios.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded"
 axios.defaults.headers.post["Content-Type"] = "application/json"

@@ -1,7 +1,10 @@
 <template>
-  <div id="pie" :style="{ width: '100%', height: '230px' }"></div>
+  <div id="pie" :style="{ width: '100%', height: '100%' }"></div>
 </template>
 <script>
+
+// echarts api官网：https://echarts.apache.org/zh/option.html#title
+
 // 引入 echarts 核心模块，核心模块提供了 echarts 使用必须要的接口。
 import * as echarts from 'echarts/core';
 // 引入柱状图图表，图表后缀都为 Chart
@@ -13,48 +16,13 @@ echarts.use([TitleComponent, TooltipComponent, LegendComponent, PieChart, Canvas
 
 export default {
   name: 'Pie',
-  data() {
-    return {
-      options: {
-        title: {
-          text: '员工性别分布',
-          left: 'left',
-        },
-        tooltip: {
-          trigger: 'item',
-        },
-        legend: {
-          orient: 'horizontal',
-          left: 'right',
-        },
-        series: [
-          {
-            name: '访问来源',
-            type: 'pie',
-            radius: ['40%', '70%'],
-            avoidLabelOverlap: false,
-            data: [],
-            emphasis: {
-              itemStyle: {
-                shadowBlur: 10,
-                shadowOffsetX: 0,
-                shadowColor: 'rgba(0, 0, 0, 0.5)',
-              },
-            },
-          },
-        ],
-      },
-    };
-  },
-  props: ['pieData'],
+  props: ['pieOptions'],
   watch: {
-    pieData: {
-      handler(val) {
-        // pieInfo = val;
-        this.options.series[0].data = val;
+    pieOptions: {
+      handler(options) {
         var chartDom = document.getElementById('pie');
         var myChart = echarts.init(chartDom);
-        myChart.setOption(this.options);
+        myChart.setOption(options);
       },
       deep: true,
     },

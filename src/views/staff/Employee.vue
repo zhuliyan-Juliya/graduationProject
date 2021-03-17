@@ -14,7 +14,7 @@
         <el-table-column prop="city_name" label="工作城市" width="150"> </el-table-column>
         <el-table-column prop="phone" label="手机" width="150"> </el-table-column>
         <el-table-column prop="company_emile" label="企业邮箱" width="150"> </el-table-column>
-        <el-table-column prop="parent_name" label="司龄" width="150"> </el-table-column>
+        <el-table-column prop="runTime" label="司龄" width="150"> </el-table-column>
         <el-table-column prop="status" label="状态">
           <template slot-scope="scope">
             <p v-if="scope.row.staff_status === '1'">
@@ -90,10 +90,10 @@
                 </el-select>
               </el-form-item>
               <el-form-item label="开始工作时间：">
-                <el-date-picker v-model="staffInfo.start_work_time" style="width: 24vw" type="date" placeholder="选择日期"> </el-date-picker>
+                <el-date-picker value-format="yyyy-MM-dd" v-model="staffInfo.start_work_time" style="width: 24vw" type="date" placeholder="选择日期"> </el-date-picker>
               </el-form-item>
               <el-form-item label="入职时间：">
-                <el-date-picker v-model="staffInfo.join_time" style="width: 24vw" type="date" placeholder="选择日期"> </el-date-picker>
+                <el-date-picker value-format="yyyy-MM-dd" v-model="staffInfo.join_time" style="width: 24vw" type="date" placeholder="选择日期"> </el-date-picker>
               </el-form-item>
               <el-form-item label="试用期：">
                 <el-select v-model="staffInfo.probation_period" style="width: 24vw" clearable>
@@ -142,6 +142,7 @@
   </div>
 </template>
 <script>
+import {computedBalanceDate} from '@src/assets/util/util.js'
 export default {
   name: 'Employee',
   data() {
@@ -206,6 +207,7 @@ export default {
   mounted() {
     this.getEmployeeList();
     this.getChooseData();
+    console.log('obj', computedBalanceDate)
   },
   methods: {
     deleteEmployee(item) {
@@ -278,6 +280,7 @@ export default {
             if (item.category) {
               item.job_category_name = item.category.name;
             }
+            item.runTime = computedBalanceDate(item.join_time)
           });
           this.parrentList = res.data.map(item => {
             return { label: item.name, value: item._id };
