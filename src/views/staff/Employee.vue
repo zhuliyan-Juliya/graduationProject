@@ -142,7 +142,6 @@
   </div>
 </template>
 <script>
-import {computedBalanceDate} from '@src/assets/util/util.js'
 export default {
   name: 'Employee',
   data() {
@@ -207,7 +206,6 @@ export default {
   mounted() {
     this.getEmployeeList();
     this.getChooseData();
-    console.log('obj', computedBalanceDate)
   },
   methods: {
     deleteEmployee(item) {
@@ -280,7 +278,6 @@ export default {
             if (item.category) {
               item.job_category_name = item.category.name;
             }
-            item.runTime = computedBalanceDate(item.join_time)
           });
           this.parrentList = res.data.map(item => {
             return { label: item.name, value: item._id };

@@ -101,12 +101,12 @@ export default {
   data() {
     return {
       cardData: [
-        { bgColor: 'rgb(35, 102, 167)', title: '总员工', icoClass: 'el-icon-user-solid', msgNum: 2, linkUrl: '/Hm' },
-        { bgColor: 'rgb(73, 167, 130)', title: '正式', icoClass: 'el-icon-user', msgNum: 3, linkUrl: '/Hm' },
-        { bgColor: 'rgb(57, 146, 193)', title: '试用期', icoClass: 'el-icon-help', msgNum: 4, linkUrl: '/Hm' },
-        { bgColor: 'rgb(233, 143, 39)', title: '本月新入职', icoClass: 'el-icon-s-check', msgNum: 5, linkUrl: '/Hm' },
-        { bgColor: 'rgb(35, 102, 167)', title: '本月离职', icoClass: 'el-icon-warning', msgNum: 6, linkUrl: '/Hm' },
-        { bgColor: 'rgb(73, 167, 130)', title: '待入职员工', icoClass: 'el-icon-circle-plus', msgNum: 6, linkUrl: '/Hm' },
+        { bgColor: 'rgb(35, 102, 167)', title: '总员工', icoClass: 'el-icon-user-solid', msgNum: 2, linkUrl: '/Home/Staff/Employee' },
+        { bgColor: 'rgb(73, 167, 130)', title: '正式', icoClass: 'el-icon-user', msgNum: 3, linkUrl: '/Home/Staff/Employee' },
+        { bgColor: 'rgb(57, 146, 193)', title: '试用期', icoClass: 'el-icon-help', msgNum: 4, linkUrl: '/Home/Staff/Employee' },
+        { bgColor: 'rgb(233, 143, 39)', title: '本月新入职', icoClass: 'el-icon-s-check', msgNum: 5, linkUrl: '/Home/Staff/Employee' },
+        { bgColor: 'rgb(35, 102, 167)', title: '本月离职', icoClass: 'el-icon-warning', msgNum: 6, linkUrl: '/Home/Staff/Employee' },
+        { bgColor: 'rgb(73, 167, 130)', title: '待入职员工', icoClass: 'el-icon-circle-plus', msgNum: 6, linkUrl: '/Home/Staff/Employee' },
       ],
       matter: null,
       matterTotal: 7,

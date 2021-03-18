@@ -28,16 +28,16 @@
   padding: 1px 10px;
   border: 1px solid #87e8de;
   border-radius: 5px;
-	background: #e6fffb;
+  background: #e6fffb;
   span {
-		color: #13c2c2;
+    color: #13c2c2;
   }
 }
 .warning {
   padding: 1px 10px;
   border: 1px solid #ffd591;
   border-radius: 5px;
-	background: #fff7e6;
+  background: #fff7e6;
   span {
     color: #fa8c16;
   }
@@ -64,3 +64,47 @@
   border-radius: 10px;
   cursor: pointer;
 }
+
+.box-border {
+  box-sizing: border-box;
+}
+
+// less 循环
+.loop(@counter) when (@counter > 0) {
+  .p-@{counter} {
+    padding: (1px * @counter);
+  }
+  .p-t-@{counter} {
+    padding-top: (1px * @counter);
+  }
+  .p-r-@{counter} {
+    padding-right: (1px * @counter);
+  }
+  .p-b-@{counter} {
+    padding-bottom: (1px * @counter);
+  }
+  .p-l-@{counter} {
+    padding-left: (1px * @counter);
+  }
+  .m-@{counter} {
+    margin: (1px * @counter);
+  }
+  .m-t-@{counter} {
+    margin-top: (1px * @counter);
+  }
+  .m-r-@{counter} {
+    margin-right: (1px * @counter);
+  }
+  .m-b-@{counter} {
+    margin-bottom: (1px * @counter);
+  }
+  .m-l-@{counter} {
+    margin-left: (1px * @counter);
+  }
+  .fz-@{counter} {
+    font-size: (1px * @counter);
+  }
+  .loop((@counter - 1)); // 递归调用自身
+}
+
+.loop(200);
