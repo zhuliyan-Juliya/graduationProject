@@ -84,6 +84,13 @@ export default [
 				path: 'System',
 				name: 'System',
 				component: () => import('../views/system/Main.vue'),
+				children: [
+					{
+						path: 'Account',
+						name: 'Account',
+						component: () => import('../views/system/AccountList.vue'),
+					},
+				]
 			},
 		]
 	},
