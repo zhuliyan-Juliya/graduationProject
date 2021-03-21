@@ -23,9 +23,9 @@ Vue.use(shortcut)
 Vue.prototype.$api = api
 
 new Vue({
-    router,
-    store,
-    render: h => h(App)
+	router,
+	store,
+	render: h => h(App)
 }).$mount('#app')
 
 console.log('系统环境变量', process.env)

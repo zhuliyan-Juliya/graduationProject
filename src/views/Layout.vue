@@ -4,13 +4,28 @@
       <el-header class="hedaer">
         <img src="../assets/images/bg.jpg" @click="preV" alt="" height="60" />
         <div class="z-line-box">
-          <div class="line-box">
+          <div class="line-box fl">
             <section class="menu-box">
               <!-- 在router-link上添加click事件会被拦截无效，需要加.native修饰符 -->
               <router-link :to="item.path" v-for="item in menu" :key="item.name" @click.native="activateMenu" :class="$route.path.indexOf(item.path) > -1 ? 'active' : ''">{{ item.name }}</router-link>
               <a>更多</a>
             </section>
           </div>
+          <section class="acount-info fr">
+            <el-menu :default-active="$route.meta.type" :mode="'horizontal'" style="background: #fff; padding: 0 10px 0 210px" :show-timeout="0">
+              <el-menu-item class="fr acount-info">
+                <template slot="title">
+                  <el-dropdown @command="handleCommand">
+                    <span class="el-dropdown-link"> {{ `hello, ${userName}` }}<i class="el-icon-arrow-down el-icon--right"></i> </span>
+                    <el-dropdown-menu slot="dropdown">
+                      <el-dropdown-item icon="el-icon-setting mr5" command="1">修改密码</el-dropdown-item>
+                      <el-dropdown-item icon="icon aliiconfont el-icon-alituichudenglu mr5" command="2">退出登录</el-dropdown-item>
+                    </el-dropdown-menu>
+                  </el-dropdown>
+                </template>
+              </el-menu-item>
+            </el-menu>
+          </section>
         </div>
       </el-header>
 
@@ -43,8 +58,9 @@ export default {
   computed: {},
 
   created() {
-    if (!localStorage.getItem('token')) {
+    if (!localStorage.getItem('userInfo')) {
       this.$router.push({ path: '/Login' });
+      localStorage.clear();
     }
   },
 
@@ -64,6 +80,20 @@ export default {
     },
     preV() {
       this.preView = true;
+    },
+    handleCommand(command) {
+      if (command == 1) {
+        // this.dialogVisible = true;
+      } else {
+        this.logout();
+      }
+    },
+    logout() {
+      this.$confirm('确认退出当前账号?').then(() => {
+        localStorage.clear();
+        this.$store.commit('removeUserInfo', {});
+        this.$router.replace('/Login');
+      });
     },
   },
 };
@@ -89,7 +119,6 @@ export default {
   .z-line-box {
     overflow: hidden;
     .line-box {
-      float: left;
       width: 500px;
       margin-left: 50px;
       .menu-box {
@@ -118,6 +147,21 @@ export default {
             opacity: 1;
             transition: all 0.3s;
             bottom: 0px;
+          }
+        }
+      }
+    }
+    .acount-info {
+      background-color: @cloor-bg!important;
+      /deep/ .el-dropdown {
+        height: 60px !important;
+      }
+      /deep/ .el-menu--horizontal {
+        background-color: @cloor-bg!important;
+        .el-dropdown {
+          color: #fff !important;
+          &:hover {
+            background-color: @cloor-bg!important;
           }
         }
       }

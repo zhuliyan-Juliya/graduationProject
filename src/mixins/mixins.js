@@ -4,6 +4,11 @@ export default {
 			bigScreen: screen.availWidth > 1500,
 		}
 	},
+	computed: {
+		userName () {
+			return JSON.parse(localStorage.getItem('userInfo')).nike_name || JSON.parse(localStorage.getItem('userInfo')).real_name
+		}
+	},
 	methods: {
 		/**
 		* 查询列表数据，返回下拉框选项

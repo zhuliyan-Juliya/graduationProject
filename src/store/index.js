@@ -1,33 +1,60 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import { Loading, Message } from 'element-ui'
+import router from '../router'
+import api from '../axios/api'
 
 Vue.use(Vuex);
 
 const state = {
-    counter: 0
+	counter: 0,
+	userInfo: {}
 }
 
 const actions = {
-    add: ({commit}) => {
-        return commit('add')
-    }
+	add: ({ commit }) => {
+		return commit('add')
+	},
+	userInfo: ({ commit }, data) => {
+		const loading = Loading.service({
+			lock: true,
+			text: '登录中...',
+			spinner: 'el-icon-loading',
+			background: 'rgba(0, 0, 0, 0.7)',
+		});
+		api.login(data).then(res => {
+			if (res.success) {
+				router.push({ path: '/Home' });
+				Message.success('登录成功！');
+				loading.close();
+				commit('userInfo', res.data)
+			}
+		});
+	}
 }
 
 const mutations = {
-    add: (state) => {
-        state.counter++
-    }
+	add: (state) => {
+		state.counter++
+	},
+	removeUserInfo: ({ state }) => {
+		state.userInfo = {}
+	},
+	userInfo: (state, data) => {
+		state.userInfo = data
+		localStorage.setItem('userInfo', JSON.stringify(data))
+	}
 }
 
 const getters = {
-    getCounter(state) {
-        return state.counter
-    }
+	getCounter (state) {
+		return state.counter
+	}
 }
 
 export default new Vuex.Store({
-    state,
-    actions,
-    mutations,
-    getters
+	state,
+	actions,
+	mutations,
+	getters
 })
