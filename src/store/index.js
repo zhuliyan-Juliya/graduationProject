@@ -23,10 +23,10 @@ const actions = {
 			background: 'rgba(0, 0, 0, 0.7)',
 		});
 		api.login(data).then(res => {
+			loading.close();
 			if (res.success) {
 				router.push({ path: '/Home' });
 				Message.success('登录成功！');
-				loading.close();
 				commit('userInfo', res.data)
 			}
 		});
@@ -37,7 +37,7 @@ const mutations = {
 	add: (state) => {
 		state.counter++
 	},
-	removeUserInfo: ({ state }) => {
+	removeUserInfo: (state) => {
 		state.userInfo = {}
 	},
 	userInfo: (state, data) => {

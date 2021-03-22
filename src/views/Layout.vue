@@ -18,7 +18,7 @@
                   <el-dropdown @command="handleCommand">
                     <span class="el-dropdown-link"> {{ `hello, ${userName}` }}<i class="el-icon-arrow-down el-icon--right"></i> </span>
                     <el-dropdown-menu slot="dropdown">
-                      <el-dropdown-item icon="el-icon-setting mr5" command="1">修改密码</el-dropdown-item>
+                      <el-dropdown-item icon="el-icon-setting mr5" command="1" v-if="isManager">修改密码</el-dropdown-item>
                       <el-dropdown-item icon="icon aliiconfont el-icon-alituichudenglu mr5" command="2">退出登录</el-dropdown-item>
                     </el-dropdown-menu>
                   </el-dropdown>
@@ -83,7 +83,7 @@ export default {
     },
     handleCommand(command) {
       if (command == 1) {
-        // this.dialogVisible = true;
+        this.$router.replace('/Home/System/Account');
       } else {
         this.logout();
       }

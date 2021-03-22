@@ -28,21 +28,7 @@ export default {
     signIn() {
       if (!this.check()) return;
       // element 全局loading
-      console.log('this', this);
       this.$store.dispatch('userInfo', this.userform);
-      // const loading = this.$loading({
-      //   lock: true,
-      //   text: '登录中...',
-      //   spinner: 'el-icon-loading',
-      //   background: 'rgba(0, 0, 0, 0.7)',
-      // });
-      // this.$api.login(this.userform).then(res => {
-      //   if (res.success) {
-      //     this.$router.push({ path: '/Home' });
-      //     this.$message.success('登录成功！');
-      //     loading.close();
-      //   }
-      // });
     },
     check() {
       let key = ['login_name', 'login_pwd'];

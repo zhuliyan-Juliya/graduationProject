@@ -3,11 +3,10 @@
     <section>
       <nav>
         <el-menu :default-active="$route.path" class="el-menu-vertical-demo" router @open="handleOpen" @close="handleClose" background-color="#F2F6F8" text-color="#2F3647 " active-text-color="#1270EC">
-          <el-menu-item index="/Home/System/Account">
+          <el-menu-item index="/Home/System/Account" v-if="isManager">
             <template slot="title">
               <img src="../../assets/images/system/account.svg" width="14" style="margin-right: 5px" />
-
-              <span class="menu-title">账号设置</span>
+              <span class="fz-16">账号设置</span>
             </template>
           </el-menu-item>
           <el-submenu index="2">

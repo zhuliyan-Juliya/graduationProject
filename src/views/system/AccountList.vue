@@ -2,7 +2,7 @@
   <div>
     <el-card shadow="hover">
       <el-row style="padding-bottom: 15px">
-        <el-button type="primary" icon="el-icon-plus" @click="newWorkCity()">新增</el-button>
+        <el-button type="primary" icon="el-icon-plus" @click="newAccount()">新增</el-button>
       </el-row>
 
       <el-table :data="tableData" ref="multipleTable" style="width: 100%" v-loading="tableLoading">
@@ -11,10 +11,17 @@
         <el-table-column prop="login_pwd" label="用户密码"> </el-table-column>
         <el-table-column prop="real_name" label="真实姓名"> </el-table-column>
         <el-table-column prop="nike_name" label="昵称"> </el-table-column>
+        <el-table-column prop="power" label="权限类别">
+          <template slot-scope="scope">
+            <div>
+              {{ scope.row.power === '2' ? '员工' : scope.row.power === '1' ? '管理员' : '超级管理员' }}
+            </div>
+          </template>
+        </el-table-column>
 
         <el-table-column fixed="right" label="操作" min-width="120">
           <template slot-scope="scope">
-            <el-button @click="newWorkCity(scope.row)" type="text" size="small">编辑</el-button>
+            <el-button @click="newAccount(scope.row)" type="text" size="small">编辑</el-button>
             <el-button type="text" size="small" style="color: #ff8c00" @click="deleteCity(scope.row._id)">删除</el-button>
           </template>
         </el-table-column>
@@ -91,7 +98,7 @@ export default {
         }
       });
     },
-    newWorkCity(editContent) {
+    newAccount(editContent) {
       if (!!editContent) {
         // 编辑
         this.editFlag = true;
@@ -109,8 +116,9 @@ export default {
     },
     passConfirm() {
       this.DialogFlag = false;
+      this.tableLoading = true;
       if (this.editFlag) {
-        this.$api.editCity(this.itemInfo).then(res => {
+        this.$api.editAccount(this.itemInfo).then(res => {
           if (res.success) {
             this.getAccoundList();
           }

@@ -7,6 +7,9 @@ export default {
 	computed: {
 		userName () {
 			return JSON.parse(localStorage.getItem('userInfo')).nike_name || JSON.parse(localStorage.getItem('userInfo')).real_name
+		},
+		isManager () {
+			return JSON.parse(localStorage.getItem('userInfo')).power !== '2'
 		}
 	},
 	methods: {

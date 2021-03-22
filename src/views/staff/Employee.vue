@@ -30,7 +30,7 @@
           </template>
         </el-table-column>
         <el-table-column prop="parent_name" label="加入公司" width="150"> </el-table-column>
-        <el-table-column fixed="right" label="操作" min-width="120">
+        <el-table-column fixed="right" label="操作" min-width="120" v-if="isManager">
           <template slot-scope="scope">
             <el-button @click="newWorkCity(scope.row)" type="text" size="small">编辑</el-button>
             <el-button @click="deleteEmployee(scope.row)" type="text" size="small">删除</el-button>
