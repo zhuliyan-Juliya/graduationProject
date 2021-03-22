@@ -1,8 +1,8 @@
 <template>
   <div>
-    <el-card shadow="hover">
+    <el-card shadow="hover" v-if="!editFlag">
       <el-row style="padding-bottom: 15px">
-        <el-button type="primary" icon="el-icon-plus" @click="newWorkCity()">添加员工</el-button>
+        <el-button type="primary" icon="el-icon-plus" @click="newEmployee()">添加员工</el-button>
       </el-row>
 
       <el-table :data="tableData" ref="multipleTable" style="width: 100%" v-loading="tableLoading">
@@ -32,12 +32,18 @@
         <el-table-column prop="parent_name" label="加入公司" width="150"> </el-table-column>
         <el-table-column fixed="right" label="操作" min-width="120" v-if="isManager">
           <template slot-scope="scope">
-            <el-button @click="newWorkCity(scope.row)" type="text" size="small">编辑</el-button>
+            <el-button @click="newEmployee(scope.row)" type="text" size="small">编辑</el-button>
             <el-button @click="deleteEmployee(scope.row)" type="text" size="small">删除</el-button>
             <el-button type="text" size="small" style="color: #ff8c00" @click="deleteCity(scope.row._id)">办理离职</el-button>
           </template>
         </el-table-column>
       </el-table>
+    </el-card>
+    <el-card shadow="hover" v-else>
+      <el-row style="padding-bottom: 15px">
+        <el-button type="primary" icon="el-icon-plus" @click="editFlag = false">返回</el-button>
+      </el-row>
+      <EditEmployee :staffInfo.sync="staffInfo"></EditEmployee>
     </el-card>
 
     <el-dialog top="2%" :modal-append-to-body="false" :title="editFlag ? '编辑' : '新增'" :visible.sync="DialogFlag" width="80vw" @close="passCancel">
@@ -142,6 +148,7 @@
   </div>
 </template>
 <script>
+import EditEmployee from './EditEmployee';
 export default {
   name: 'Employee',
   data() {
@@ -207,6 +214,9 @@ export default {
     this.getEmployeeList();
     this.getChooseData();
   },
+  components: {
+    EditEmployee,
+  },
   methods: {
     deleteEmployee(item) {
       this.tableLoading = true;
@@ -227,17 +237,17 @@ export default {
         }
       });
     },
-    newWorkCity(editContent) {
+    newEmployee(editContent) {
       if (!!editContent) {
         // 编辑
         this.editFlag = true;
-
+        // this.
         this.staffInfo = JSON.parse(JSON.stringify(editContent));
       } else {
         this.editFlag = false;
         this.staffInfo = JSON.parse(JSON.stringify(this.sourceData));
+        this.DialogFlag = true;
       }
-      this.DialogFlag = true;
     },
     passCancel() {
       this.DialogFlag = false;
