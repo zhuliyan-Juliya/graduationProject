@@ -69,7 +69,7 @@ export default {
   computed: {},
 
   mounted() {
-    console.log('this.bigScreen', this.screenWidth)
+    console.log('this.bigScreen', this.screenWidth);
   },
 
   methods: {
@@ -104,7 +104,7 @@ div {
   .right {
     overflow: hidden;
     background-color: #fff;
-    height: 100vh;
+    // height: 100vh;
     padding-top: 60px;
     aside {
       float: left;
