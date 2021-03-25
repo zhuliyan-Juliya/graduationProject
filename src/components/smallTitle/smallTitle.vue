@@ -4,7 +4,7 @@
       <span>{{ titleInfo.titleLeft }}</span>
     </h3>
     <span>
-      <a class="edit-btn">
+      <a class="edit-btn" @click="editInfo(titleInfo)">
         <i aria-label="图标: edit" class="anticon anticon-edit" style="margin-right: 2px; height: 18px; vertical-align: middle">
           <svg viewBox="64 64 896 896" focusable="false" class="" data-icon="edit" width="1em" height="1em" fill="currentColor" aria-hidden="true">
             <path
@@ -12,7 +12,7 @@
             ></path>
           </svg>
         </i>
-        <span @click="editInfo(titleInfo)">编辑</span>
+        <span>编辑</span>
       </a>
     </span>
   </div>
