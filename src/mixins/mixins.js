@@ -28,22 +28,20 @@ export default {
 			})
 		},
 		/**
-		* 深拷贝
+		* 深拷贝	数组 对象 都可以
 		* @param {Object} source - 拷贝源对象
 		* @returns {Object}
 		*/
 		deepClone (source) {
-			let target = {};
-			for (let key in source) {
-				if (Object.prototype.hasOwnProperty.call(source, key)) {
-					if (typeof source[key] === 'object') {
-						target[key] = this.deepClone(source[key])
-					} else {
-						target[key] = source[key]
-					}
+			if (typeof source === 'object') {
+				let cloneTarget = Array.isArray(source) ? [] : {}
+				for (const key in source) {
+					cloneTarget[key] = this.deepClone(source[key])
 				}
+				return cloneTarget
+			} else {
+				return source
 			}
-			return target
 		}
 	},
 }

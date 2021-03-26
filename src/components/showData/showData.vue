@@ -4,7 +4,7 @@
       <label>
         <span>{{ item.label }}</span>
       </label>
-      <p>{{ item.value }}</p>
+      <p>{{ item.visableName ? item.visableName : item.value }}</p>
     </li>
   </ul>
 </template>

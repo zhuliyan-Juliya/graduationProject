@@ -1,17 +1,18 @@
 <template>
   <div class="layout">
-    <div class="ovHidden m-t-20">
-      <SmallTitle :titleInfo="titleInfo1" @editInfo="editInfo"></SmallTitle>
-      <ShowData :showData="showData1"></ShowData>
+    <div class="ovHidden m-t-20" v-for="(item, index) in showDataInfo" :key="index">
+      <SmallTitle :titleInfo="item.title" @editInfo="editInfo"></SmallTitle>
+      <ShowData :showData="item.data"></ShowData>
     </div>
-    <div class="ovHidden m-t-20">
+    <!-- <div class="ovHidden m-t-20">
       <SmallTitle :titleInfo="titleInfo2" @editInfo="editInfo"></SmallTitle>
       <ShowData :showData="showData2"></ShowData>
     </div>
     <div class="ovHidden m-t-20">
       <SmallTitle :titleInfo="titleInfo3" @editInfo="editInfo"></SmallTitle>
       <ShowData :showData="showData3"></ShowData>
-    </div>
+    </div> -->
+
     <el-dialog :modal-append-to-body="false" title="编辑" :visible.sync="showDataFlag" width="60vw" @close="passCancel">
       <el-form :value="itemInfo" class="wid-100" inline label-position="right" label-width="120px">
         <el-row>
@@ -48,134 +49,76 @@
 <script>
 import SmallTitle from '@src/components/smallTitle/smallTitle';
 import ShowData from '@src/components/showData/showData';
+import Select from '@src/assets/js/selectOptions';
 export default {
   data() {
     return {
-      titleInfo1: {
-        titleLeft: '基础信息',
-        dataName: 'showData1',
-      },
       dialogData: [],
-      showData1: [
-        { type: 'input', visable: false, prop: '_id', label: '系统标识码', value: '123123123' },
-        { type: 'input', visable: false, prop: 'phone', label: '系统账号', value: '13065158818' },
-        { type: 'input', visable: true, prop: 'serial_num', label: '员工编号', value: '001' },
-        { type: 'input', visable: true, prop: 'name', label: '姓名', value: '盛静银' },
-        { type: 'input', visable: true, prop: 'show_name', label: '显示名', value: '盛静银' },
-        { type: 'select', visable: true, prop: 'card_type', label: '证件类型', value: '剧名身份证' },
-        { type: 'input', visable: true, prop: 'card_num', label: '证件号码', value: '剧名身份证' },
-        { type: 'date', visable: true, prop: 'birth_date', label: '出生日期', value: '剧名身份证' },
-        { type: 'input', visable: false, prop: '', label: '年龄', value: '剧名身份证' },
+      // 渲染数据
+      showDataInfo: [
         {
-          type: 'select',
-          visable: true,
-          prop: 'marital_status',
-          label: '婚姻状况',
-          value: '剧名身份证',
-          options: [
-            { label: '已婚', value: '0' },
-            { label: '未婚', value: '1' },
-            { label: '离异', value: '2' },
+          title: {
+            titleLeft: '基础信息',
+            dataName: 'showData1',
+          },
+          data: [
+            { type: 'input', visable: false, prop: '_id', label: '系统标识码', value: '' },
+            { type: 'input', visable: false, prop: 'phone', label: '系统账号', value: '' },
+            { type: 'input', visable: true, prop: 'serial_num', label: '员工编号', value: '' },
+            { type: 'input', visable: true, prop: 'name', label: '姓名', value: '' },
+            { type: 'input', visable: true, prop: 'show_name', label: '显示名', value: '' },
+            { type: 'select', visable: true, prop: 'card_type', label: '证件类型', value: '', options: Select.card_type },
+            { type: 'input', visable: true, prop: 'card_num', label: '证件号码', value: '' },
+            { type: 'date', visable: true, prop: 'birth_date', label: '出生日期', value: '' },
+            { type: 'input', visable: false, prop: 'age', label: '年龄', value: '' },
+            { type: 'select', visable: true, prop: 'marital_status', label: '婚姻状况', value: '', options: Select.maritalStatus },
+            { type: 'radio', visable: true, prop: 'sex', label: '性别', value: '', options: Select.sex },
+            { type: 'select', visable: true, prop: 'hight_education', label: '最高学历', value: '', options: Select.hightEducation },
+            { type: 'select', visable: true, prop: 'politics_status', label: '政治面貌', value: '', options: Select.politicsStatus },
+            { type: 'input', visable: true, prop: 'nation', label: '民族', value: '' },
+            { type: 'select', visable: true, prop: 'registered_type', label: '户口类型', value: '', options: Select.registeredType },
+            { type: 'input', visable: true, prop: 'registered_address', label: '户籍地址', value: '' },
+            { type: 'input', visable: true, prop: 'registered_permanent_residence', label: '户口所在地', value: '' },
           ],
         },
         {
-          type: 'radio',
-          visable: true,
-          prop: 'sex',
-          label: '性别',
-          value: 1,
-          options: [
-            { label: '男', value: 1 },
-            { label: '女', value: 2 },
+          title: {
+            titleLeft: '联系方式',
+            dataName: 'showData2',
+          },
+          data: [
+            { type: 'input', visable: true, prop: '', label: '通讯地址', value: '' },
+            { type: 'input', visable: true, prop: '', label: '手机', value: '' },
+            { type: 'input', visable: true, prop: '', label: '家庭电话', value: '' },
+            { type: 'input', visable: true, prop: '', label: '公司邮箱', value: '' },
+            { type: 'input', visable: true, prop: '', label: '个人邮箱', value: '' },
+            { type: 'input', visable: true, prop: '', label: 'QQ', value: '' },
+            { type: 'input', visable: true, prop: '', label: '微信', value: '' },
           ],
         },
         {
-          type: 'select',
-          visable: true,
-          prop: 'hight_education',
-          label: '最高学历',
-          value: '剧名身份证',
-          options: [
-            { label: '博士', value: 0 },
-            { label: '硕士', value: 1 },
-            { label: '本科', value: 2 },
-            { label: '大专', value: 3 },
-            { label: '其它', value: 4 },
+          title: {
+            titleLeft: '在职信息',
+            dataName: 'showData3',
+          },
+          data: [
+            { type: 'select', visable: true, prop: '', label: '所属公司/中心', value: '' },
+            { type: 'select', visable: true, prop: '', label: '部门', value: '' },
+            { type: 'select', visable: true, prop: '', label: '职位', value: '' },
+            { type: 'select', visable: true, prop: '', label: '工作城市', value: '' },
+            { type: 'select', visable: true, prop: '', label: '工作性质', value: '' },
+            { type: 'radio', visable: true, prop: '', label: '员工状态', value: '', options: Select.statusOptions },
+            { type: 'date', visable: true, prop: '', label: '开始工作时间', value: '' },
+            { type: 'date', visable: true, prop: '', label: '入职日期', value: '' },
+            { type: 'select', visable: false, prop: '', label: '工龄', value: '' },
+            { type: 'select', visable: false, prop: '', label: '司龄', value: '' },
+            { type: 'date', visable: true, prop: '', label: '转正日期', value: '' },
+            { type: 'select', visable: true, prop: '', label: '合同年限', value: '' },
+            { type: 'date', visable: true, prop: '', label: '合同结束日期', value: '' },
+            { type: 'select', visable: true, prop: '', label: '任职受雇类型', value: '' },
+            { type: 'select', visable: false, prop: '', label: '岗位说明书', value: '' },
           ],
         },
-        {
-          type: 'select',
-          visable: true,
-          prop: 'politics_status',
-          label: '政治面貌',
-          value: '剧名身份证',
-          options: [
-            { label: '中共党员', value: 0 },
-            { label: '中共预备党员', value: 1 },
-            { label: '共青团员', value: 2 },
-            { label: '其它', value: 3 },
-          ],
-        },
-        { type: 'input', visable: true, prop: 'nation', label: '民族', value: '剧名身份证' },
-        {
-          type: 'select',
-          visable: true,
-          prop: 'nation',
-          label: '户口类型',
-          value: '剧名身份证',
-          options: [
-            { label: '本地城镇', value: 0 },
-            { label: '本地农村', value: 1 },
-            { label: '外地城镇', value: 2 },
-            { label: '外地农村', value: 3 },
-          ],
-        },
-        { type: 'input', visable: true, prop: 'registered_address', label: '户籍地址', value: '剧名身份证' },
-        { type: 'input', visable: true, prop: 'registered_permanent_residence', label: '户口所在地', value: '剧名身份证' },
-      ],
-      titleInfo2: {
-        titleLeft: '联系方式',
-        dataName: 'showData2',
-      },
-      showData2: [
-        { type: 'input', visable: true, prop: '', label: '通讯地址', value: '123123123' },
-        { type: 'input', visable: true, prop: '', label: '手机', value: '13065158818' },
-        { type: 'input', visable: true, prop: '', label: '家庭电话', value: '001' },
-        { type: 'input', visable: true, prop: '', label: '公司邮箱', value: '盛静银' },
-        { type: 'input', visable: true, prop: '', label: '个人邮箱', value: '剧名身份证' },
-        { type: 'input', visable: true, prop: '', label: 'QQ', value: '剧名身份证' },
-        { type: 'input', visable: true, prop: '', label: '微信', value: '剧名身份证' },
-      ],
-      titleInfo3: {
-        titleLeft: '在职信息',
-        dataName: 'showData3',
-      },
-      showData3: [
-        { type: 'select', visable: true, prop: '', label: '所属公司/中心', value: '123123123' },
-        { type: 'select', visable: true, prop: '', label: '部门', value: '13065158818' },
-        { type: 'select', visable: true, prop: '', label: '职位', value: '001' },
-        { type: 'select', visable: true, prop: '', label: '工作城市', value: '盛静银' },
-        { type: 'select', visable: true, prop: '', label: '工作性质', value: '剧名身份证' },
-        {
-          type: 'radio',
-          visable: true,
-          prop: '',
-          label: '员工状态',
-          value: '剧名身份证',
-          options: [
-            { label: '正式', value: '1' },
-            { label: '试用', value: '2' },
-          ],
-        },
-        { type: 'date', visable: true, prop: '', label: '开始工作时间', value: '剧名身份证' },
-        { type: 'date', visable: true, prop: '', label: '入职日期', value: '剧名身份证' },
-        { type: 'select', visable: false, prop: '', label: '工龄', value: '剧名身份证' },
-        { type: 'select', visable: false, prop: '', label: '司龄', value: '剧名身份证' },
-        { type: 'date', visable: true, prop: '', label: '转正日期', value: '剧名身份证' },
-        { type: 'select', visable: true, prop: '', label: '合同年限', value: '剧名身份证' },
-        { type: 'date', visable: true, prop: '', label: '合同结束日期', value: '剧名身份证' },
-        { type: 'select', visable: true, prop: '', label: '任职受雇类型', value: '剧名身份证' },
-        { type: 'select', visable: false, prop: '', label: '岗位说明书', value: '剧名身份证' },
       ],
       showDataFlag: false,
       itemInfo: {},
@@ -187,13 +130,19 @@ export default {
     ShowData,
   },
   mounted() {
-    this.showData1.forEach(item => {
+    this.showDataInfo[0].data.forEach(item => {
       let prop = item.prop;
+      // 处理常规数据
       if (this.staffInfo.hasOwnProperty(prop)) {
         item.value = this.staffInfo[prop];
       }
+      // 处理常规数据中是下拉框或者单选框的数据
+      if (item.hasOwnProperty('options')) {
+        let findValue = item.options.find(o => o.value == item.value);
+        item.visableName = (findValue && findValue.label) || '';
+      }
     });
-    console.log('this.staffInfo', this.showData1);
+    console.log('this.showDataInfo[0].data', this.showDataInfo[0].data);
   },
   methods: {
     passConfirm() {},
@@ -204,22 +153,19 @@ export default {
       this.showDataFlag = true;
       switch (data.dataName) {
         case 'showData1':
-          this.dialogData = this.deepClone(this.showData1);
-          console.log('this', this.dialogData, this.itemInfo);
-          this.dialogData.forEach(item => {
-            console.log('item', item);
-          });
-          // for (let i = 0; i < this.dialogData.length; i++) {
-          //   console.log('this.dialogData[i].prop', this.dialogData[i].prop);
-          //   this.itemInfo[this.dialogData[i].prop] = this.dialogData[i].value;
-          // }
-          console.log('this.itemInfo', this.itemInfo);
+          this.dialogData = this.deepClone(this.showDataInfo[0].data);
+          // 常规数据直接赋值
+          for (let i = 0; i < this.dialogData.length; i++) {
+            this.itemInfo[this.dialogData[i].prop] = this.dialogData[i].value;
+          }
+          // 复杂数据需要特殊处理
+
           break;
         case 'showData2':
-          this.dialogData = this.deepClone(this.showData2);
+          this.dialogData = this.deepClone(this.showDataInfo[1].data);
           break;
         case 'showData3':
-          this.dialogData = this.deepClone(this.showData3);
+          this.dialogData = this.deepClone(this.showDataInfo[2].data);
           break;
       }
     },

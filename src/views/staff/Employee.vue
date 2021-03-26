@@ -87,7 +87,7 @@
               </div>
               <el-form-item label="工作性质：">
                 <el-select v-model="staffInfo.job_category" style="width: 24vw" clearable>
-                  <el-option v-for="(item, index) in workTypeListOptiosn" :key="index" :value="item.value" :label="item.label" />
+                  <el-option v-for="(item, index) in workTypeListOptions" :key="index" :value="item.value" :label="item.label" />
                 </el-select>
               </el-form-item>
               <el-form-item label="员工状态：">
@@ -149,6 +149,7 @@
 </template>
 <script>
 import EditEmployee from './EditEmployee';
+import Select from '@src/assets/js/selectOptions';
 export default {
   name: 'Employee',
   data() {
@@ -162,47 +163,11 @@ export default {
         sex: 1,
       },
       parrentList: [],
-      parentOptions: [{ value: 'testCompany', label: 'testCompany' }],
-      schemeOptions: [{ value: '', label: '暂无数据', disable: true }],
-      cardListOptions: [
-        { value: '1', label: '居民身份证' },
-        { value: '2', label: '港澳居民来往内地通行证' },
-        { value: '3', label: '台湾居民来往内地通行证' },
-        { value: '4', label: '香港身份证ID' },
-        { value: '5', label: '港澳居民居住证' },
-        { value: '6', label: '台湾居民居住证' },
-        { value: '7', label: '其它个人证件' },
-      ],
-      workTypeListOptiosn: [
-        { value: '1', label: '全职' },
-        { value: '2', label: '兼职' },
-        { value: '3', label: '实习' },
-        { value: '4', label: '返聘' },
-        { value: '5', label: '劳务派遣' },
-      ],
-      statusOptions: [
-        { value: '1', label: '正式' },
-        { value: '2', label: '试用' },
-      ],
-      probationPeriodOptions: [
-        { value: '1', label: '无试用期' },
-        { value: '2', label: '一个月' },
-        { value: '3', label: '两个月' },
-        { value: '4', label: '三个月' },
-        { value: '5', label: '四个月' },
-        { value: '6', label: '五个月' },
-        { value: '7', label: '六个月' },
-      ],
-      contractOptions: [
-        { value: '1', label: '无期限' },
-        { value: '2', label: '六个月' },
-        { value: '3', label: '一年' },
-        { value: '4', label: '两年' },
-        { value: '5', label: '三年' },
-        { value: '6', label: '四年' },
-        { value: '7', label: '五年' },
-        { value: '8', label: '六年' },
-      ],
+      cardListOptions: Select.card_type,
+      workTypeListOptions: Select.workTypeListOptions,
+      statusOptions: Select.statusOptions,
+      probationPeriodOptions: Select.probationPeriodOptions,
+      contractOptions: Select.contractOptions,
       companyList: [],
       departmentList: [],
       categoryList: [],
