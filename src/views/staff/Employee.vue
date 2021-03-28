@@ -43,7 +43,14 @@
       <el-row style="padding-bottom: 15px">
         <el-button type="primary" icon="el-icon-plus" @click="editFlag = false">返回</el-button>
       </el-row>
-      <EditEmployee :staffInfo.sync="staffInfo"></EditEmployee>
+      <EditEmployee
+        :staffInfo.sync="staffInfo"
+        :s_companyList="companyList"
+        :s_categoryList="categoryList"
+        :s_cityList="cityList"
+        :s_departmentList="departmentList"
+        @finishEdit="finishEdit"
+      ></EditEmployee>
     </el-card>
 
     <el-dialog top="2%" :modal-append-to-body="false" :title="editFlag ? '编辑' : '新增'" :visible.sync="DialogFlag" width="80vw" @close="passCancel">
@@ -69,6 +76,9 @@
               </el-form-item>
               <el-form-item label="手机号：">
                 <el-input v-model.number="staffInfo.phone" placeholder="境外手机请加国际电话区号，例：862-123456" clearable style="width: 24vw"></el-input>
+              </el-form-item>
+              <el-form-item label="企业邮箱：">
+                <el-input v-model.number="staffInfo.company_emile" placeholder="请输入" clearable style="width: 24vw"></el-input>
               </el-form-item>
               <el-form-item label="证件类型：">
                 <el-select v-model="staffInfo.card_type" style="width: 24vw" clearable>
@@ -168,10 +178,6 @@ export default {
       statusOptions: Select.statusOptions,
       probationPeriodOptions: Select.probationPeriodOptions,
       contractOptions: Select.contractOptions,
-      companyList: [],
-      departmentList: [],
-      categoryList: [],
-      cityList: [],
       rankList: [],
     };
   },
@@ -183,6 +189,11 @@ export default {
     EditEmployee,
   },
   methods: {
+    async finishEdit() {
+      let { data } = await this.getEmployeeList();
+      let targetPeople = data.find(item => item._id === this.staffInfo._id);
+      this.staffInfo = targetPeople;
+    },
     deleteEmployee(item) {
       this.tableLoading = true;
       this.$api.deleteEmployee({ id: item._id }).then(res => {
@@ -236,52 +247,34 @@ export default {
     },
     getEmployeeList() {
       this.tableLoading = true;
-      this.$api.getEmployeeList().then(res => {
-        this.tableLoading = false;
-        if (res.success) {
-          this.tableData = res.data;
-          this.tableData.forEach(item => {
-            if (item.company) {
-              item.company_name = item.company.name;
-            }
-            if (item.city) {
-              item.city_name = item.city.region_name;
-            }
-            if (item.department) {
-              item.department_name = item.department.name;
-            }
-            if (item.category) {
-              item.job_category_name = item.category.name;
-            }
-          });
-          this.parrentList = res.data.map(item => {
-            return { label: item.name, value: item._id };
-          });
-        }
-      });
-    },
-    getChooseData() {
-      this.getSelectListOptions('getCompanyList').then(arr => {
-        this.companyList = arr.map(item => {
-          return { label: item.name, value: item._id };
-        });
-      });
-      this.getSelectListOptions('getDepartmentList').then(arr => {
-        this.departmentList = arr.map(item => {
-          return { label: item.name, value: item._id };
-        });
-      });
-      this.getSelectListOptions('getCategoryList').then(arr => {
-        this.categoryList = arr.map(item => {
-          return { label: item.name, value: item._id };
-        });
-      });
-      this.getSelectListOptions('getCityList').then(arr => {
-        this.cityList = arr.map(item => {
-          return { label: item.region_name, value: item._id };
+      return new Promise(resolve => {
+        this.$api.getEmployeeList().then(res => {
+          this.tableLoading = false;
+          if (res.success) {
+            this.tableData = res.data;
+            this.tableData.forEach(item => {
+              if (item.company) {
+                item.company_name = item.company.name;
+              }
+              if (item.city) {
+                item.city_name = item.city.region_name;
+              }
+              if (item.department) {
+                item.department_name = item.department.name;
+              }
+              if (item.category) {
+                item.job_category_name = item.category.name;
+              }
+            });
+            this.parrentList = res.data.map(item => {
+              return { label: item.name, value: item._id };
+            });
+          }
+          resolve(res);
         });
       });
     },
+
     deleteCity(id) {
       this.$api.deleteCategory({ id: id }).then(res => {
         if (res.success) {

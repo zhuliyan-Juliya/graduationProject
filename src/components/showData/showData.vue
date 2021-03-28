@@ -1,11 +1,13 @@
 <template>
   <ul>
-    <li v-for="item in showData" :key="item.label">
-      <label>
-        <span>{{ item.label }}</span>
-      </label>
-      <p>{{ item.visableName ? item.visableName : item.value }}</p>
-    </li>
+    <template v-for="item in showData">
+      <li v-show="!item.hidden" :key="item.label">
+        <label>
+          <span>{{ item.label }}</span>
+        </label>
+        <p>{{ item.visableName ? item.visableName : item.value }}</p>
+      </li>
+    </template>
   </ul>
 </template>
 <script>

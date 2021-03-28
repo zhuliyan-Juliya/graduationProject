@@ -64,10 +64,10 @@ export default {
 	],
 	// 政治面貌
 	politicsStatus: [
-		{ label: '博士', value: '0' },
-		{ label: '硕士', value: '1' },
-		{ label: '本科', value: '2' },
-		{ label: '大专', value: '3' },
+		{ label: '中共党员', value: '0' },
+		{ label: '中共预备党员', value: '1' },
+		{ label: '共青团员', value: '2' },
+		{ label: '社会主义接班人', value: '3' },
 		{ label: '其它', value: '4' },
 	],
 	registeredType: [
@@ -75,5 +75,12 @@ export default {
 		{ label: '本地农村', value: '1' },
 		{ label: '外地城镇', value: '2' },
 		{ label: '外地农村', value: '3' },
+	],
+	employmentType: [
+		{ label: '雇员', value: '0' },
+		{ label: '保险营销员', value: '1' },
+		{ label: '证券经纪人', value: '2' },
+		{ label: '其他', value: '3' },
+		{ label: '实习学生', value: '4' },
 	]
 }

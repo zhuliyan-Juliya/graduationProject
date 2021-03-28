@@ -5,7 +5,14 @@
     <!-- <el-divider></el-divider> -->
     <el-tabs v-model="activeName" @tab-click="handleClick">
       <el-tab-pane label="基本档案" name="first">
-        <BaseFile :staffInfo="staffInfo"></BaseFile>
+        <BaseFile
+          :staffInfo="staffInfo"
+          :s_companyList="s_companyList"
+          :s_categoryList="s_categoryList"
+          :s_cityList="s_cityList"
+          :s_departmentList="s_departmentList"
+          @finishEdit="finishEdit"
+        ></BaseFile>
       </el-tab-pane>
       <el-tab-pane label="个人信息" name="second">配置管理</el-tab-pane>
       <el-tab-pane label="证件管理" name="third">角色管理</el-tab-pane>
@@ -25,7 +32,7 @@ export default {
       activeName: 'first',
     };
   },
-  props: ['staffInfo'],
+  props: ['staffInfo', 's_companyList', 's_departmentList', 's_categoryList', 's_cityList'],
   components: {
     BaseFile,
   },
@@ -33,6 +40,9 @@ export default {
   methods: {
     handleClick(tab, event) {
       console.log(tab, event);
+    },
+    finishEdit() {
+      this.$emit('finishEdit');
     },
   },
 };

@@ -2,6 +2,10 @@ export default {
 	data () {
 		return {
 			bigScreen: screen.availWidth > 1500,
+			companyList: [],	//	公司列表
+			departmentList: [],	//	部门列表
+			categoryList: [],	//	职位分类
+			cityList: [],	//	城市分类
 		}
 	},
 	computed: {
@@ -13,6 +17,31 @@ export default {
 		}
 	},
 	methods: {
+		getChooseData () {
+			return new Promise(resolve => {
+				let task = [
+					this.getSelectListOptions('getCompanyList'),
+					this.getSelectListOptions('getDepartmentList'),
+					this.getSelectListOptions('getCategoryList'),
+					this.getSelectListOptions('getCityList'),
+				]
+				Promise.all(task).then(res => {
+					this.companyList = res[0].map(item => {
+						return { label: item.name, value: item._id };
+					});
+					this.departmentList = res[1].map(item => {
+						return { label: item.name, value: item._id };
+					});
+					this.categoryList = res[2].map(item => {
+						return { label: item.name, value: item._id };
+					});
+					this.cityList = res[3].map(item => {
+						return { label: item.region_name, value: item._id };
+					});
+					resolve()
+				})
+			})
+		},
 		/**
 		* 查询列表数据，返回下拉框选项
 		* @param {apiName}  - api名称
