@@ -75,10 +75,10 @@
                 <el-radio v-model="staffInfo.sex" :label="0">女</el-radio>
               </el-form-item>
               <el-form-item label="手机号：">
-                <el-input v-model.number="staffInfo.phone" placeholder="境外手机请加国际电话区号，例：862-123456" clearable style="width: 24vw"></el-input>
+                <el-input v-model.trim="staffInfo.phone" placeholder="境外手机请加国际电话区号，例：862-123456" clearable style="width: 24vw"></el-input>
               </el-form-item>
               <el-form-item label="企业邮箱：">
-                <el-input v-model.number="staffInfo.company_emile" placeholder="请输入" clearable style="width: 24vw"></el-input>
+                <el-input v-model.trim="staffInfo.company_emile" placeholder="请输入" clearable style="width: 24vw"></el-input>
               </el-form-item>
               <el-form-item label="证件类型：">
                 <el-select v-model="staffInfo.card_type" style="width: 24vw" clearable>

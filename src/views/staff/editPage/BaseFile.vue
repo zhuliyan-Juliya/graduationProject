@@ -120,7 +120,7 @@ export default {
             { hidden: false, type: 'date', visable: true, prop: 'join_time', label: '入职日期', value: '' },
             { hidden: false, type: 'select', visable: false, prop: '', label: '工龄', value: '' },
             { hidden: false, type: 'input', visable: false, prop: 'runTime', label: '司龄', value: '' },
-            { hidden: false, type: 'date', visable: true, prop: '', label: '转正日期', value: '' },
+            { hidden: false, type: 'date', visable: false, prop: 'full_member_time', label: '转正日期', value: '' },
             { hidden: false, type: 'select', visable: true, prop: 'contract_time', label: '合同年限', value: '' },
             { hidden: false, type: 'date', visable: true, prop: '', label: '合同结束日期', value: '' },
             { hidden: false, type: 'select', visable: true, prop: 'employment_type', label: '任职受雇类型', value: '', options: Select.employmentType },
