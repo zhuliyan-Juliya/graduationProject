@@ -13,8 +13,8 @@
               <el-menu-item index="/Home/Organization/CompanyList">单位设置</el-menu-item>
               <el-menu-item index="/Home/Organization/Department">部门设置</el-menu-item>
               <el-menu-item index="/Home/Organization/Workcity">工作城市</el-menu-item>
-              <el-menu-item index="/Home/Organization/Structure/1">组织架构图</el-menu-item>
-              <el-menu-item index="/Home/Organization/Structure/2">组织汇报图</el-menu-item>
+              <el-menu-item index="/Home/Organization/Structure/1" disabled>组织架构图</el-menu-item>
+              <el-menu-item index="/Home/Organization/Structure/2" disabled>组织汇报图</el-menu-item>
             </el-menu-item-group>
           </el-submenu>
           <el-submenu index="2">
@@ -25,10 +25,10 @@
             <el-menu-item-group>
               <el-menu-item index="/Home/Organization/Category">职类管理</el-menu-item>
               <el-menu-item index="/Home/Organization/Designation">职位管理</el-menu-item>
-              <el-menu-item index="/Home/Organization/PositionSystem">职位体系</el-menu-item>
+              <el-menu-item index="/Home/Organization/PositionSystem" disabled>职位体系</el-menu-item>
             </el-menu-item-group>
           </el-submenu>
-          <el-submenu index="3">
+          <el-submenu index="3" disabled>
             <template slot="title">
               <img src="../../assets/images/authorized.svg" width="14" style="margin-right: 5px" />
               <span class="menu-title">编制管理</span>

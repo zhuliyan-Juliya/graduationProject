@@ -2,7 +2,16 @@
   <div>
     <section>
       <nav>
-        <el-menu :default-active="$route.path" class="el-menu-vertical-demo" router @open="handleOpen" @close="handleClose" background-color="#F2F6F8" text-color="#2F3647 " active-text-color="#1270EC">
+        <el-menu
+          :default-active="$route.path"
+          class="el-menu-vertical-demo"
+          router
+          @open="handleOpen"
+          @close="handleClose"
+          background-color="#F2F6F8"
+          text-color="#2F3647 "
+          active-text-color="#1270EC"
+        >
           <el-submenu index="1">
             <template slot="title">
               <img src="../../assets/images/organization.svg" width="14" style="margin-right: 5px" />
@@ -12,15 +21,15 @@
             <el-menu-item-group>
               <el-menu-item index="/Home/Staff/Employee">员工花名册</el-menu-item>
               <el-menu-item index="/Home/Staff/Report">人才统计</el-menu-item>
-              <el-menu-item index="/Home/Staff/Workcity">档案统计</el-menu-item>
-              <el-menu-item index="/Home/Staff/Structure/1">邀请员工</el-menu-item>
-              <el-menu-item index="/Home/Staff/Structure/2">员工审核</el-menu-item>
-              <el-menu-item index="/Home/Staff/Structure/2">证件管理</el-menu-item>
-              <el-menu-item index="/Home/Staff/Structure/2">历史花名册</el-menu-item>
-              <el-menu-item index="/Home/Staff/Structure/2">黑名单</el-menu-item>
+              <el-menu-item index="/Home/Staff/Workcity" disabled>档案统计</el-menu-item>
+              <el-menu-item index="/Home/Staff/Structure/1" disabled>邀请员工</el-menu-item>
+              <el-menu-item index="/Home/Staff/Structure/2" disabled>员工审核</el-menu-item>
+              <el-menu-item index="/Home/Staff/Structure/2" disabled>证件管理</el-menu-item>
+              <el-menu-item index="/Home/Staff/Structure/2" disabled>历史花名册</el-menu-item>
+              <el-menu-item index="/Home/Staff/Structure/2" disabled>黑名单</el-menu-item>
             </el-menu-item-group>
           </el-submenu>
-          <el-submenu index="2">
+          <el-submenu index="2" disabled>
             <template slot="title">
               <img src="../../assets/images/job.svg" width="14" style="margin-right: 5px" />
               <span class="menu-title">人事异动</span>
@@ -31,7 +40,7 @@
               <el-menu-item index="/Home/Staff/PositionSystem">离职管理</el-menu-item>
             </el-menu-item-group>
           </el-submenu>
-          <el-submenu index="3">
+          <el-submenu index="3" disabled>
             <template slot="title">
               <img src="../../assets/images/authorized.svg" width="14" style="margin-right: 5px" />
               <span class="menu-title">合同管理</span>

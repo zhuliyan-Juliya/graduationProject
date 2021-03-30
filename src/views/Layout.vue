@@ -7,7 +7,9 @@
           <div class="line-box fl">
             <section class="menu-box">
               <!-- 在router-link上添加click事件会被拦截无效，需要加.native修饰符 -->
-              <router-link :to="item.path" v-for="item in menu" :key="item.name" @click.native="activateMenu" :class="$route.path.indexOf(item.path) > -1 ? 'active' : ''">{{ item.name }}</router-link>
+              <router-link :to="item.path" v-for="item in menu" :key="item.name" @click.native="activateMenu" :class="$route.path.indexOf(item.path) > -1 ? 'active' : ''">{{
+                item.name
+              }}</router-link>
               <a>更多</a>
             </section>
           </div>
@@ -58,10 +60,10 @@ export default {
   computed: {},
 
   created() {
-    if (!localStorage.getItem('userInfo')) {
-      this.$router.push({ path: '/Login' });
-      localStorage.clear();
-    }
+    // if (!localStorage.getItem('userInfo')) {
+    //   this.$router.push({ path: '/Login' });
+    //   localStorage.clear();
+    // }
   },
 
   mounted() {},

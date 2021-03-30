@@ -61,7 +61,9 @@ export default {
   computed: {},
 
   mounted() {
-    console.log('this.bigScreen', this.screenWidth);
+		if (this.isManager) {
+			this.$router.push({path: `${location.pathname}/Account`})
+		}
   },
 
   methods: {

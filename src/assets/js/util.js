@@ -34,7 +34,7 @@ export function computedBalanceDay (date) {
 * @param {IdCard} String - 身份证号
 * @returns {Number}
 */
-export function computedAge (IdCard) {
+export function computedAge (IdCard = '') {
 	let now = new Date().getFullYear()
 	let age = null
 	switch (IdCard.length) {
@@ -54,7 +54,7 @@ export function computedAge (IdCard) {
 * @param {IdCard} String - 身份证号
 * @returns {Number}
 */
-export function computedTime (IdCard) {
+export function computedTime (IdCard = '') {
 	let time = null
 	switch (IdCard.length) {
 		case 15:

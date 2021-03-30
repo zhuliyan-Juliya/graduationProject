@@ -2,7 +2,7 @@
   <div>
     <el-card shadow="hover" v-if="!editFlag">
       <el-row style="padding-bottom: 15px">
-        <el-button type="primary" icon="el-icon-plus" @click="newEmployee()">添加员工</el-button>
+        <el-button type="primary" icon="el-icon-plus" @click="newEmployee()" v-if="isManager">添加员工</el-button>
       </el-row>
 
       <el-table :data="tableData" ref="multipleTable" style="width: 100%" v-loading="tableLoading">
@@ -53,7 +53,7 @@
       ></EditEmployee>
     </el-card>
 
-    <el-dialog top="2%" :modal-append-to-body="false" :title="editFlag ? '编辑' : '新增'" :visible.sync="DialogFlag" width="80vw" @close="passCancel">
+    <el-dialog top="2%" :modal-append-to-body="false" :title="editFlag ? '编辑' : '新增'" :visible.sync="DialogFlag" :width="dialogWidth" @close="passCancel">
       <el-form :value="staffInfo" class="wid-100" inline label-position="right" label-width="7vw">
         <main class="clearfix">
           <aside style="width: 48%; margin: 0 1% 0 1%" class="fl">

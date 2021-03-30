@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-card shadow="hover">
-      <el-row style="padding-bottom: 15px">
+      <el-row style="padding-bottom: 15px" v-if="isManager">
         <el-button type="primary" icon="el-icon-plus" @click="newWorkCity()">新增</el-button>
       </el-row>
 
@@ -35,7 +35,7 @@
       </el-table>
     </el-card>
 
-    <el-dialog :modal-append-to-body="false" :title="editFlag ? '编辑' : '新增'" :visible.sync="DialogFlag" width="60vw" @close="passCancel">
+    <el-dialog :modal-append-to-body="false" :title="editFlag ? '编辑' : '新增'" :visible.sync="DialogFlag" :width="dialogWidth" @close="passCancel">
       <el-form :value="itemInfo" class="wid-100" inline label-position="right" label-width="120px">
         <el-row>
           <el-col :span="12">

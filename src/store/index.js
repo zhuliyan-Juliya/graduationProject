@@ -26,7 +26,10 @@ const actions = {
 			loading.close();
 			if (res.success) {
 				router.push({ path: '/Home' });
-				Message.success('登录成功！');
+				Message.success({
+					message: '登录成功！',
+					duration: 1500
+				});
 				commit('userInfo', res.data)
 			}
 		});
@@ -36,6 +39,7 @@ const actions = {
 const mutations = {
 	add: (state) => {
 		state.counter++
+		console.log('state.counter', state.counter)
 	},
 	removeUserInfo: (state) => {
 		state.userInfo = {}

@@ -37,7 +37,8 @@
 import PieCharts from '@src/components/Echarts/Pie.vue';
 import BarCharts from '@src/components/Echarts/Bar.vue';
 import LineCharts from '@src/components/Echarts/Line.vue';
-import { computedBalanceDay, computedAge, computedTime } from '@src/assets/js/util.js';
+// import { obj.computedBalanceDay, computedAge, computedTime } from '@src/assets/js/util.js';
+import * as obj from '@src/assets/js/util.js';
 export default {
   name: 'Report',
   data() {
@@ -196,10 +197,9 @@ export default {
           let TimeSectionNum = new Array(7).fill(0);
 
           res.data.forEach(item => {
-            let day = computedBalanceDay(item.join_time);
-            let age = computedAge(item.card_num);
-            let time = computedTime(item.card_num);
-
+            let day = obj.computedBalanceDay(item.join_time);
+            let age = obj.computedAge(item.card_num);
+            let time = obj.computedTime(item.card_num);
             let runTimeIndex = sectionDay.findIndex(item => {
               return item >= day;
             });

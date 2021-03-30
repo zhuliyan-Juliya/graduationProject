@@ -145,7 +145,7 @@ export default {
       shortcutFuncData: [
         { disable: false, imgUrl: require('images/social.svg'), desc: '社保计算器', linkUrl: 'https://salary.dhumedia.cn/' },
         { disable: false, imgUrl: require('images/personalIncome.svg'), desc: '个税计算器', linkUrl: 'https://www.gerensuodeshui.cn/' },
-        { disable: true, imgUrl: require('images/talentPool.svg'), desc: '人才库', linkUrl: 'https://www.gerensuodeshui.cn/' },
+        { disable: false, imgUrl: require('images/talentPool.svg'), desc: '人才库', linkUrl: 'https://www.gerensuodeshui.cn/' },
         { disable: false, imgUrl: require('images/social.svg'), desc: '社保计算器', linkUrl: 'https://salary.dhumedia.cn/' },
         { disable: false, imgUrl: require('images/personalIncome.svg'), desc: '个税计算器', linkUrl: 'https://www.gerensuodeshui.cn/' },
         { disable: true, imgUrl: require('images/talentPool.svg'), desc: '人才库', linkUrl: 'https://www.gerensuodeshui.cn/' },

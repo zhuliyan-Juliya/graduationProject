@@ -6,6 +6,7 @@ export default {
 			departmentList: [],	//	部门列表
 			categoryList: [],	//	职位分类
 			cityList: [],	//	城市分类
+			dialogWidth: '80vw'
 		}
 	},
 	computed: {

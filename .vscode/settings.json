@@ -11,7 +11,7 @@
     "workcity"
   ],
   // 格式化设置
-  "editor.formatOnSave": true,
+  "editor.formatOnSave": false,
   "editor.minimap.maxColumn": 80,
   "vetur.format.defaultFormatter.html": "prettier",
   "vetur.format.defaultFormatter.js": "prettier",

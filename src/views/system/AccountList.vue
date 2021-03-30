@@ -28,7 +28,7 @@
       </el-table>
     </el-card>
 
-    <el-dialog :modal-append-to-body="false" :title="editFlag ? '编辑' : '新增'" :visible.sync="DialogFlag" width="60vw" @close="passCancel">
+    <el-dialog :modal-append-to-body="false" :title="editFlag ? '编辑' : '新增'" :visible.sync="DialogFlag" :width="dialogWidth" @close="passCancel">
       <el-form :value="itemInfo" class="wid-100" inline label-position="right" label-width="100px">
         <el-row>
           <el-col :span="12">

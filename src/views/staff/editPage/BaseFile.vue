@@ -13,7 +13,7 @@
       <ShowData :showData="showData3"></ShowData>
     </div> -->
 
-    <el-dialog :modal-append-to-body="false" title="编辑" :visible.sync="showDataFlag" width="80vw" @close="passCancel">
+    <el-dialog :modal-append-to-body="false" title="编辑" :visible.sync="showDataFlag" :width="dialogWidth" @close="passCancel">
       <el-form :value="itemInfo" class="wid-100" inline label-position="right" label-width="120px">
         <el-row>
           <!-- 可实现任意数据 驱动 视图， 减少重复代码 -->
@@ -118,10 +118,10 @@ export default {
             { hidden: false, type: 'radio', visable: true, prop: 'staff_status', label: '员工状态', value: '', options: Select.statusOptions },
             { hidden: false, type: 'date', visable: true, prop: 'start_work_time', label: '开始工作时间', value: '' },
             { hidden: false, type: 'date', visable: true, prop: 'join_time', label: '入职日期', value: '' },
-            { hidden: false, type: 'select', visable: false, prop: '', label: '工龄', value: '' },
+            { hidden: false, type: 'select', visable: false, prop: 'workingTime', label: '工龄', value: '' },
             { hidden: false, type: 'input', visable: false, prop: 'runTime', label: '司龄', value: '' },
             { hidden: false, type: 'date', visable: false, prop: 'full_member_time', label: '转正日期', value: '' },
-            { hidden: false, type: 'select', visable: true, prop: 'contract_time', label: '合同年限', value: '' },
+            { hidden: false, type: 'select', visable: true, prop: 'contract_time', label: '合同年限', value: '' ,options: Select.contractOptions},
             { hidden: false, type: 'date', visable: true, prop: '', label: '合同结束日期', value: '' },
             { hidden: false, type: 'select', visable: true, prop: 'employment_type', label: '任职受雇类型', value: '', options: Select.employmentType },
             { hidden: false, type: 'select', visable: false, prop: '', label: '岗位说明书', value: '' },
@@ -152,6 +152,7 @@ export default {
       this.initForm();
       this.initFormData();
     });
+		console.log('this.staffInfo', this.staffInfo)
   },
   methods: {
     // 把 staffInfo 的数据传入到本组件内
