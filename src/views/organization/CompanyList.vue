@@ -46,31 +46,31 @@
         <el-row>
           <el-col :span="12">
             <el-form-item label="名称：">
-              <el-input v-model.trim="itemInfo.name" clearable style="width: 300px"></el-input>
+              <el-input v-model.trim="itemInfo.name" clearable :style="{ width: formWidth }" placeholder="请输入公司名称"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="单位简称：">
-              <el-input v-model.trim="itemInfo.short_name" clearable style="width: 300px"></el-input>
+              <el-input v-model.trim="itemInfo.short_name" clearable :style="{ width: formWidth }"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="类型：">
-              <el-select v-model="itemInfo.typeText" style="width: 300px" clearable>
+              <el-select v-model="itemInfo.typeText" :style="{ width: formWidth }" clearable>
                 <el-option v-for="(item, index) in typeList" :key="index" :value="item.value" :label="item.label" />
               </el-select>
             </el-form-item>
           </el-col>
           <el-col :span="12" v-if="itemInfo.typeText != '总部'">
             <el-form-item label="上级：">
-              <el-select v-model="itemInfo.parent_name" style="width: 300px" clearable>
-                <el-option v-for="(item, index) in parentOptions" :key="index" :value="item.value" :label="item.label" />
+              <el-select v-model="itemInfo.parent_name" :style="{ width: formWidth }" clearable>
+                <el-option v-for="(item, index) in parentList" :key="index" :value="item.value" :label="item.label" />
               </el-select>
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="职位体系：">
-              <el-select v-model="itemInfo.scheme" style="width: 300px" clearable>
+              <el-select v-model="itemInfo.scheme" :style="{ width: formWidth }" clearable>
                 <el-option v-for="(item, index) in schemeOptions" :key="index" :disabled="item.disable" :value="item.value" :label="item.label" />
               </el-select>
             </el-form-item>
@@ -96,29 +96,8 @@ export default {
     return {
       DialogFlag: false,
       tableLoading: false,
-      tableData: [
-        {
-          company_id: 4716,
-          company_uuid: '3C84A22C-9AF5-A4B6-48A1-25B135E28D2C',
-          created_at: '2021-02-20 20:03:53',
-          ding_id: '0',
-          feishu_id: '0',
-          id: 6949,
-          name: 'testCompany',
-          num: 2,
-          order: '99999999',
-          parent_name: '无',
-          pid: 0,
-          position_scheme_id: '0',
-          scheme: null,
-          short_name: '',
-          status: 1,
-          type: 0,
-          typeText: '总部',
-          updated_at: '2021-02-20 20:03:53',
-          wework_id: '0',
-        },
-      ],
+      tableData: [],
+      parentList: [],
       editFlag: false,
       itemInfo: {},
       sourceData: {
@@ -129,7 +108,6 @@ export default {
         { value: '分部', label: '分部' },
         { value: '中心', label: '中心' },
       ],
-      parentOptions: [{ value: 'testCompany', label: 'testCompany' }],
       schemeOptions: [{ value: '技术员', label: '技术员' }],
       // schemeOptions: [{ value: '', label: '暂无数据', disable: true }],
     };
@@ -146,6 +124,9 @@ export default {
       this.$api.toggleCompanyStatus(obj).then(res => {
         if (res.success) {
           this.getCompanyList();
+          this.parentList = res.data.map(item => {
+            return { label: item.name, value: item._id };
+          });
         }
       });
     },

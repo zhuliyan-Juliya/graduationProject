@@ -21,15 +21,16 @@
             <el-col :span="12" :key="item.label" v-if="item.visable">
               <el-form-item :label="item.label">
                 <div v-if="item.type === 'input'">
-                  <el-input v-model.trim="itemInfo[item.prop]" type="text" clearable style="width: 300px" placeholder="请输入..."></el-input>
+                  <el-input v-model.trim="itemInfo[item.prop]" type="text" clearable :style="{ width: formWidth }" placeholder="请输入..."></el-input>
                 </div>
                 <div v-else-if="item.type === 'select'">
-                  <el-select v-model="itemInfo[item.prop]" clearable style="width: 300px" placeholder="请选择">
+                  <el-select v-model="itemInfo[item.prop]" clearable :style="{ width: formWidth }" placeholder="请选择">
                     <el-option v-for="o in item.options" :key="o.value" :label="o.label" :value="o.value"></el-option>
                   </el-select>
                 </div>
                 <div v-else-if="item.type === 'date'">
-                  <el-date-picker value-format="yyyy-MM-dd" v-model="itemInfo[item.prop]" style="width: 300px" clearable type="date" placeholder="请选择"> </el-date-picker>
+                  <el-date-picker value-format="yyyy-MM-dd" v-model="itemInfo[item.prop]" :style="{ width: formWidth }" clearable type="date" placeholder="请选择">
+                  </el-date-picker>
                 </div>
                 <div v-else-if="item.type === 'radio'" style="width: 300px; text-align: left">
                   <el-radio-group v-model="itemInfo[item.prop]">
@@ -121,7 +122,7 @@ export default {
             { hidden: false, type: 'select', visable: false, prop: 'workingTime', label: '工龄', value: '' },
             { hidden: false, type: 'input', visable: false, prop: 'runTime', label: '司龄', value: '' },
             { hidden: false, type: 'date', visable: false, prop: 'full_member_time', label: '转正日期', value: '' },
-            { hidden: false, type: 'select', visable: true, prop: 'contract_time', label: '合同年限', value: '' ,options: Select.contractOptions},
+            { hidden: false, type: 'select', visable: true, prop: 'contract_time', label: '合同年限', value: '', options: Select.contractOptions },
             { hidden: false, type: 'date', visable: true, prop: '', label: '合同结束日期', value: '' },
             { hidden: false, type: 'select', visable: true, prop: 'employment_type', label: '任职受雇类型', value: '', options: Select.employmentType },
             { hidden: false, type: 'select', visable: false, prop: '', label: '岗位说明书', value: '' },
@@ -152,7 +153,7 @@ export default {
       this.initForm();
       this.initFormData();
     });
-		console.log('this.staffInfo', this.staffInfo)
+    console.log('this.staffInfo', this.staffInfo);
   },
   methods: {
     // 把 staffInfo 的数据传入到本组件内

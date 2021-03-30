@@ -40,12 +40,12 @@
         <el-row>
           <el-col :span="12">
             <el-form-item label="职类名称：">
-              <el-input v-model.trim="itemInfo.name" clearable style="width: 300px"></el-input>
+              <el-input v-model.trim="itemInfo.name" clearable :style="{ width: formWidth }"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="上级职类：">
-              <el-select v-model="itemInfo.pid" style="width: 300px" clearable>
+              <el-select v-model="itemInfo.pid" :style="{ width: formWidth }" clearable>
                 <el-option v-for="(item, index) in parrentList" :key="index" :value="item.value" :label="item.label" />
               </el-select>
             </el-form-item>

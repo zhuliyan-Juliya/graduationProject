@@ -46,31 +46,31 @@
         <el-row>
           <el-col :span="12">
             <el-form-item label="名称：">
-              <el-input v-model.trim="itemInfo.name" clearable style="width: 300px"></el-input>
+              <el-input v-model.trim="itemInfo.name" clearable :style="{ width: formWidth }"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="单位简称：">
-              <el-input v-model.trim="itemInfo.short_name" clearable style="width: 300px"></el-input>
+              <el-input v-model.trim="itemInfo.short_name" clearable :style="{ width: formWidth }"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="类型：">
-              <el-select v-model="itemInfo.typeText" style="width: 300px">
+              <el-select v-model="itemInfo.typeText" :style="{ width: formWidth }">
                 <el-option v-for="(item, index) in typeList" :key="index" :value="item.value" :label="item.label" />
               </el-select>
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="上级：">
-              <el-select v-model="itemInfo.parent_name" style="width: 300px">
+              <el-select v-model="itemInfo.parent_name" :style="{ width: formWidth }">
                 <el-option v-for="(item, index) in parentOptions" :key="index" :value="item.value" :label="item.label" />
               </el-select>
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="职位体系：">
-              <el-select v-model="itemInfo.scheme" style="width: 300px">
+              <el-select v-model="itemInfo.scheme" :style="{ width: formWidth }">
                 <el-option v-for="(item, index) in schemeOptions" :key="index" :disabled="item.disable" :value="item.value" :label="item.label" />
               </el-select>
             </el-form-item>

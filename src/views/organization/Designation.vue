@@ -70,7 +70,7 @@
         <el-row>
           <el-col :span="12">
             <el-form-item label="职位名称：">
-              <el-input v-model.trim="itemInfo.designation" clearable style="width: 300px" placeholder="请输入职位名称"></el-input>
+              <el-input v-model.trim="itemInfo.designation" clearable :style="{ width: formWidth }" placeholder="请输入职位名称"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="12">
@@ -81,28 +81,28 @@
           </el-col>
           <el-col :span="12">
             <el-form-item label="所属部门：">
-              <el-select v-model="itemInfo.deptID" style="width: 300px" clearable>
+              <el-select v-model="itemInfo.deptID" :style="{ width: formWidth }" clearable>
                 <el-option v-for="(item, index) in departmentOptions" :key="index" :value="item.value" :label="item.label" />
               </el-select>
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="职类：">
-              <el-select v-model="itemInfo.jobClassID" style="width: 300px" clearable>
+              <el-select v-model="itemInfo.jobClassID" :style="{ width: formWidth }" clearable>
                 <el-option v-for="(item, index) in jobCategory" :key="index" :value="item.value" :label="item.label" />
               </el-select>
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="上级职位部门：">
-              <el-select v-model="itemInfo.superiorDeptID" style="width: 300px" clearable>
+              <el-select v-model="itemInfo.superiorDeptID" :style="{ width: formWidth }" clearable>
                 <el-option v-for="(item, index) in departmentOptions" :key="index" :value="item.value" :label="item.label" />
               </el-select>
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="上级职位：">
-              <el-select v-model="itemInfo.pid" style="width: 300px" clearable>
+              <el-select v-model="itemInfo.pid" :style="{ width: formWidth }" clearable>
                 <el-option v-for="(item, index) in parrentList" :key="index" :value="item.value" :label="item.label" />
               </el-select>
             </el-form-item>
@@ -110,7 +110,7 @@
 
           <el-col :span="12">
             <el-form-item label="岗位说明书：">
-              <el-input v-model="itemInfo.desc" type="textarea" :rows="3" style="width: 300px" placeholder="请输入..."></el-input>
+              <el-input v-model="itemInfo.desc" type="textarea" :rows="3" :style="{ width: formWidth }" placeholder="请输入..."></el-input>
             </el-form-item>
           </el-col>
         </el-row>

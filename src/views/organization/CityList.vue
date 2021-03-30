@@ -39,7 +39,7 @@
         <el-row>
           <el-col :span="12">
             <el-form-item label="工作城市：">
-              <el-input v-model.trim="itemInfo.region_name" clearable style="width: 300px"></el-input>
+              <el-input v-model.trim="itemInfo.region_name" clearable :style="{ width: formWidth }"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="12">

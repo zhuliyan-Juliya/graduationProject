@@ -74,31 +74,31 @@
         <el-row>
           <el-col :span="12">
             <el-form-item label="部门名称：">
-              <el-input v-model.trim="itemInfo.name" clearable style="width: 300px" placeholder="请输入部门名称"></el-input>
+              <el-input v-model.trim="itemInfo.name" clearable :style="{ width: formWidth }" placeholder="请输入部门名称"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="部门简称：">
-              <el-input v-model.trim="itemInfo.short_name" clearable style="width: 300px" placeholder="请输入部门简称"></el-input>
+              <el-input v-model.trim="itemInfo.short_name" clearable :style="{ width: formWidth }" placeholder="请输入部门简称"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="所属公司：">
-              <el-select v-model="itemInfo.companyID" style="width: 300px" clearable>
+              <el-select v-model="itemInfo.companyID" :style="{ width: formWidth }" clearable>
                 <el-option v-for="(item, index) in companyList" :key="index" :value="item.value" :label="item.label" />
               </el-select>
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="上级部门：">
-              <el-select v-model="itemInfo.parentID" style="width: 300px" clearable>
+              <el-select v-model="itemInfo.parentID" :style="{ width: formWidth }" clearable>
                 <el-option v-for="(item, index) in parentOptions" :key="index" :value="item.value" :label="item.label" />
               </el-select>
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="所在城市：">
-              <el-select v-model="itemInfo.cityID" style="width: 300px">
+              <el-select v-model="itemInfo.cityID" :style="{ width: formWidth }">
                 <el-option v-for="(item, index) in cityOptions" :key="index" :disabled="item.disable" :value="item.value" :label="item.label" />
               </el-select>
             </el-form-item>

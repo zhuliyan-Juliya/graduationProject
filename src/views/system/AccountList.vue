@@ -33,27 +33,27 @@
         <el-row>
           <el-col :span="12">
             <el-form-item label="用户账号：">
-              <el-input v-model.trim="itemInfo.login_name" placeholder="请输入账号" clearable style="width: 300px"></el-input>
+              <el-input v-model.trim="itemInfo.login_name" placeholder="请输入账号" clearable :style="{ width: formWidth }"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="用户密码：">
-              <el-input v-model.trim="itemInfo.login_pwd" placeholder="请输入密码" clearable style="width: 300px"></el-input>
+              <el-input v-model.trim="itemInfo.login_pwd" placeholder="请输入密码" clearable :style="{ width: formWidth }"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="真实姓名：">
-              <el-input v-model.trim="itemInfo.real_name" placeholder="请输入真实姓名" clearable style="width: 300px"></el-input>
+              <el-input v-model.trim="itemInfo.real_name" placeholder="请输入真实姓名" clearable :style="{ width: formWidth }"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="昵称：">
-              <el-input v-model.trim="itemInfo.nike_name" placeholder="请输入昵称" clearable style="width: 300px"></el-input>
+              <el-input v-model.trim="itemInfo.nike_name" placeholder="请输入昵称" clearable :style="{ width: formWidth }"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="权限：">
-              <el-select v-model="itemInfo.power" placeholder="请选择" style="width: 300px">
+              <el-select v-model="itemInfo.power" placeholder="请选择" :style="{ width: formWidth }">
                 <el-option v-for="item in powerOptions" :key="item.value" :label="item.label" :value="item.value"> </el-option>
               </el-select>
             </el-form-item>
