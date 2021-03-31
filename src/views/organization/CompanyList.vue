@@ -91,6 +91,7 @@
   </div>
 </template>
 <script>
+import Select from '@src/assets/js/selectOptions';
 export default {
   data() {
     return {
@@ -103,12 +104,14 @@ export default {
       sourceData: {
         status: 1,
       },
-      typeList: [
-        { value: '总部', label: '总部' },
-        { value: '分部', label: '分部' },
-        { value: '中心', label: '中心' },
+      typeList: Select.companyType,
+      schemeOptions: [
+        { value: '1', label: '客服类' },
+        { value: '2', label: '市场类' },
+        { value: '3', label: '运营类' },
+        { value: '4', label: '设计类' },
+        { value: '5', label: '技术类' },
       ],
-      schemeOptions: [{ value: '技术员', label: '技术员' }],
       // schemeOptions: [{ value: '', label: '暂无数据', disable: true }],
     };
   },
@@ -124,9 +127,6 @@ export default {
       this.$api.toggleCompanyStatus(obj).then(res => {
         if (res.success) {
           this.getCompanyList();
-          this.parentList = res.data.map(item => {
-            return { label: item.name, value: item._id };
-          });
         }
       });
     },
@@ -170,6 +170,9 @@ export default {
         this.tableLoading = false;
         if (res.success) {
           this.tableData = res.data;
+          this.parentList = res.data.map(item => {
+            return { label: item.name, value: item._id };
+          });
         }
       });
     },

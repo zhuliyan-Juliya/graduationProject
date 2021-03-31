@@ -158,10 +158,6 @@ export default {
 
   components: {},
 
-  computed: {},
-
-  mounted() {},
-
   methods: {
     goMatterDetail(derection) {
       console.log('derection', derection);

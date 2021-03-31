@@ -1,4 +1,9 @@
 export default {
+	companyType: [
+		{ value: '总部', label: '总部' },
+		{ value: '分部', label: '分部' },
+		{ value: '中心', label: '中心' },
+	],
 	// 证件类型
 	card_type: [
 		{ value: '1', label: '居民身份证' },
